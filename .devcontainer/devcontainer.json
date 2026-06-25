@@ -1,0 +1,27 @@
+{
+  "name": "AWS Production Web Platform",
+  "build": {
+    "context": ".",
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "amazonwebservices.aws-toolkit-vscode",
+        "timonwong.shellcheck",
+        "foxundermoon.shell-format",
+        "redhat.vscode-yaml",
+        "github.vscode-github-actions",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "shellcheck.enable": true,
+        "shellcheck.run": "onSave"
+      }
+    }
+  },
+  "postCreateCommand": "aws --version && jq --version && shellcheck --version && echo 'Dev container ready.'",
+  "remoteUser": "vscode"
+}
