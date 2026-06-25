@@ -1,0 +1,27 @@
+name: Validate Shell Syntax
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-shell:
+    name: Validate Bash syntax
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate shell scripts
+        run: |
+          find . \
+            -path "./.git" -prune -o \
+            -type f \
+            -name "*.sh" \
+            -print0 | while IFS= read -r -d '' file; do
+              echo "Checking $file"
+              bash -n "$file"
+            done
