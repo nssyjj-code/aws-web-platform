@@ -1,5 +1,5 @@
 {
-  "name": "AWS Production Web Platform",
+  "name": "AWS Web Platform",
   "build": {
     "context": ".",
     "dockerfile": "Dockerfile"

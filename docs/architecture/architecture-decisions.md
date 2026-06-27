@@ -359,6 +359,8 @@ Deploy infrastructure using AWS CLI automation scripts.
 
 ## Alternatives Considered
 
+The platform intentionally uses AWS CLI automation to reinforce understanding of AWS APIs, service dependencies, infrastructure lifecycle management, and troubleshooting. Terraform is identified as the logical evolution for production infrastructure management once foundational AWS concepts have been demonstrated.
+
 | Alternative       | Reason Not Selected                                                                |
 | ----------------- | ---------------------------------------------------------------------------------- |
 | Terraform         | Excellent production tool, but abstracts some service-level implementation details |
@@ -485,6 +487,31 @@ Use AWS Systems Manager Session Manager rather than direct SSH access.
 | VPN access        | Unnecessary complexity for project scope |
 
 ---
+
+ADR-013: Centralized Environment Configuration
+
+Decision:
+Use a shared environment.conf file for non-secret deployment configuration.
+
+Benefits:
+- Eliminates duplicated values
+- Simplifies environment changes
+- Keeps deployment scripts generic
+- Improves maintainability
+
+Alternatives:
+- Hardcoded variables
+- Per-script configuration
+
+ADR-014: Configuration-Driven Deployment
+
+Decision:
+Drive infrastructure deployment from centralized configuration and reusable shell libraries.
+
+Benefits:
+- Reusable automation
+- Easier maintenance
+- Cleaner deployment logic
 
 # Summary
 
