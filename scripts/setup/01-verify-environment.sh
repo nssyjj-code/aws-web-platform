@@ -22,6 +22,7 @@ readonly SCRIPT_DIR
 export AWS_PAGER=""
 
 # shellcheck source=../lib/logging.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR/../lib/logging.sh"
 
 log_info "Verifying local deployment environment..."
