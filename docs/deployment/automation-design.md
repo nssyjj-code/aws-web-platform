@@ -4,7 +4,10 @@
 
 This document describes the automation architecture used to deploy, validate, and destroy the AWS Web Platform.
 
-The platform is intentionally automated using AWS CLI and Bash to demonstrate infrastructure lifecycle management, dependency handling, resource discovery, and operational automation principles commonly used in cloud engineering environments.
+The platform is intentionally automated using AWS CLI and Bash to
+demonstrate infrastructure lifecycle management, dependency handling,
+resource discovery, and operational automation principles commonly
+used in cloud engineering environments.
 
 Automation goals include:
 
@@ -15,6 +18,9 @@ Automation goals include:
 * Operational visibility
 * Idempotent execution
 * Troubleshooting support
+
+This document describes the overall automation architecture, deployment workflow, shared libraries, 
+validation strategy, and infrastructure lifecycle used throughout the project.
 
 ---
 
@@ -497,6 +503,19 @@ docs/deployment/deployment-guide.md
 docs/operations/testing-strategy.md
 docs/operations/operational-runbook.md
 ```
+
+---
+
+## Design Goals
+
+The automation framework was intentionally designed to demonstrate:
+
+* Modular Bash automation
+* Infrastructure lifecycle management
+* Dependency-aware provisioning
+* Idempotent deployments
+* Operational validation
+* Production-style automation patterns
 
 ---
 
