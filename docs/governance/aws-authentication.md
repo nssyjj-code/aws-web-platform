@@ -17,7 +17,7 @@ The implementation prioritizes security, credential separation, and AWS best pra
 
 ---
 
-# Authentication Architecture
+## Authentication Architecture
 
 The platform uses different authentication mechanisms depending on the actor performing actions within AWS.
 
@@ -49,7 +49,7 @@ AWS IAM Role
 
 ---
 
-# Development Authentication Model
+## Development Authentication Model
 
 This project uses:
 
@@ -64,7 +64,7 @@ Deployment scripts never contain embedded credentials.
 
 ---
 
-# Local AWS Configuration
+## Local AWS Configuration
 
 Configure credentials:
 
@@ -92,7 +92,7 @@ These files are intentionally excluded from source control.
 
 ---
 
-# Identity Verification
+## Identity Verification
 
 Before deployment begins, automation validates the active AWS identity.
 
@@ -121,7 +121,7 @@ Deployment should only proceed after confirming:
 
 ---
 
-# Deployment Authentication Workflow
+## Deployment Authentication Workflow
 
 During deployment:
 
@@ -149,7 +149,7 @@ Credentials are never:
 
 ---
 
-# Infrastructure Authentication
+## Infrastructure Authentication
 
 Application instances do not use AWS access keys.
 
@@ -179,7 +179,7 @@ Benefits:
 
 ---
 
-# Systems Manager Access
+## Systems Manager Access
 
 The platform uses AWS Systems Manager permissions through:
 
@@ -202,7 +202,7 @@ Benefits:
 
 ---
 
-# Security Controls
+## Security Controls
 
 Several controls protect authentication credentials.
 
@@ -243,7 +243,7 @@ Authentication is separated by purpose.
 
 ---
 
-# Why This Approach Was Chosen
+## Why This Approach Was Chosen
 
 For a personal development environment, locally configured AWS credentials provide:
 
@@ -256,13 +256,13 @@ This approach allows focus on AWS infrastructure design rather than identity pla
 
 ---
 
-# Production Considerations
+## Production Considerations
 
 The authentication model used for this project is appropriate for development and portfolio environments but would not be the preferred long-term production solution.
 
 ---
 
-## IAM Identity Center (AWS SSO)
+### IAM Identity Center (AWS SSO)
 
 Recommended for enterprise environments.
 
@@ -275,7 +275,7 @@ Benefits:
 
 ---
 
-## IAM Role Assumption
+### IAM Role Assumption
 
 Recommended for administrative access.
 
@@ -287,7 +287,7 @@ Benefits:
 
 ---
 
-## CI/CD Federation
+### CI/CD Federation
 
 Future deployment automation could use OpenID Connect (OIDC).
 
@@ -315,7 +315,7 @@ Benefits:
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 Potential authentication enhancements include:
 
@@ -328,7 +328,7 @@ Potential authentication enhancements include:
 
 ---
 
-# Related Documentation
+## Related Documentation
 
 Additional security and operational references:
 
@@ -347,7 +347,7 @@ ADR-012 Systems Manager Instead of SSH
 
 ---
 
-# Lessons Learned
+## Lessons Learned
 
 This project reinforced several AWS security principles.
 
@@ -360,7 +360,20 @@ This project reinforced several AWS security principles.
 
 ---
 
-# Summary
+## Design Goals
+
+The authentication model was intentionally designed to demonstrate:
+
+* Secure AWS authentication
+* Separation of human and workload identities
+* IAM role-based access
+* AWS best practices
+* Credential management
+* Production-ready authentication patterns
+
+---
+
+## Summary
 
 The AWS Web Platform uses AWS-native authentication and authorization mechanisms that emphasize credential separation, least privilege, and operational security.
 
