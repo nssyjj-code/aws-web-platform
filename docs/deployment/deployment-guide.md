@@ -33,7 +33,7 @@ Infrastructure components deployed include:
 
 ---
 
-# Deployment Architecture
+## Deployment Architecture
 
 The deployment process follows a layered architecture.
 
@@ -57,7 +57,7 @@ The deployment process uses dependency-aware execution to ensure AWS resources a
 
 ---
 
-# Prerequisites
+## Prerequisites
 
 Before deployment, verify the following requirements.
 
@@ -71,7 +71,7 @@ Required:
 
 ---
 
-## Required Tools
+### Required Tools
 
 | Tool    | Required Version |
 | ------- | ---------------- |
@@ -97,7 +97,7 @@ GNU bash 4.x or newer
 
 ---
 
-# Repository Setup
+## Repository Setup
 
 Clone the repository:
 
@@ -122,7 +122,7 @@ Verify repository structure:
 
 ---
 
-# AWS Authentication
+## AWS Authentication
 
 Configure AWS credentials:
 
@@ -146,7 +146,7 @@ Deployment should not proceed until the active AWS identity is verified.
 
 ---
 
-# Required Environment Variables
+## Required Environment Variables
 
 Database credentials are intentionally excluded from source control.
 
@@ -174,7 +174,7 @@ Production environments should use AWS Secrets Manager rather than manually expo
 
 ---
 
-# Environment Configuration
+## Environment Configuration
 
 Deployment configuration is stored in:
 
@@ -199,7 +199,7 @@ Configuration should remain externalized.
 
 ---
 
-# Cost Awareness
+## Cost Awareness
 
 This platform provisions production-style AWS infrastructure.
 
@@ -226,7 +226,7 @@ docs/governance/cost-optimization.md
 
 ---
 
-# Deployment Execution
+## Deployment Execution
 
 Start deployment:
 
@@ -250,9 +250,9 @@ No individual deployment scripts need to be executed manually.
 
 ---
 
-# Deployment Stages
+## Deployment Stages
 
-## Stage 1 – Environment Validation
+### Stage 1 – Environment Validation
 
 Validates:
 
@@ -270,7 +270,7 @@ scripts/setup/02-configure-aws.sh
 
 ---
 
-## Stage 2 – Network Foundation
+### Stage 2 – Network Foundation
 
 Creates:
 
@@ -289,7 +289,7 @@ Availability Zones
 
 ---
 
-## Stage 3 – Network Routing
+### Stage 3 – Network Routing
 
 Creates:
 
@@ -315,7 +315,7 @@ Private Application:
 
 ---
 
-## Stage 4 – Security Layer
+### Stage 4 – Security Layer
 
 Creates:
 
@@ -340,7 +340,7 @@ Database Tier
 
 ---
 
-## Stage 5 – IAM Configuration
+### Stage 5 – IAM Configuration
 
 Creates:
 
@@ -356,7 +356,7 @@ Benefits:
 
 ---
 
-## Stage 6 – Compute Deployment
+### Stage 6 – Compute Deployment
 
 Creates:
 
@@ -379,7 +379,7 @@ HealthStatus = Healthy
 
 ---
 
-## Stage 7 – Load Balancer Deployment
+### Stage 7 – Load Balancer Deployment
 
 Creates:
 
@@ -402,7 +402,7 @@ TargetHealth.State = healthy
 
 ---
 
-## Stage 8 – Database Deployment
+### Stage 8 – Database Deployment
 
 Creates:
 
@@ -424,7 +424,7 @@ Status = available
 
 ---
 
-# Post-Deployment Verification
+## Post-Deployment Verification
 
 Run:
 
@@ -434,24 +434,24 @@ Run:
 
 Verification checks:
 
-## Networking
+### Networking
 
 * VPC exists
 * Subnets exist
 * Route tables configured
 
-## Compute
+### Compute
 
 * Auto Scaling Group active
 * Instances healthy
 * Target Group healthy
 
-## Database
+### Database
 
 * Aurora cluster available
 * Aurora instance available
 
-## Security
+### Security
 
 * Private application instances
 * Private database resources
@@ -459,7 +459,7 @@ Verification checks:
 
 ---
 
-# Deployment Troubleshooting
+## Deployment Troubleshooting
 
 Common issues:
 
@@ -484,7 +484,7 @@ Because the deployment is idempotent, rerunning deployment after correcting an i
 
 ---
 
-# Rollback Procedure
+## Rollback Procedure
 
 Remove the environment:
 
@@ -516,7 +516,7 @@ This prevents AWS dependency violations.
 
 ---
 
-# Production Evolution
+## Production Evolution
 
 Future enhancements could include:
 
@@ -532,7 +532,7 @@ Future enhancements could include:
 
 ---
 
-# Related Documentation
+## Related Documentation
 
 Additional deployment references:
 
@@ -544,7 +544,20 @@ docs/operations/operational-runbook.md
 
 ---
 
-# Summary
+## Design Goals
+
+The deployment workflow was intentionally designed to demonstrate:
+
+* Dependency-aware provisioning
+* Idempotent deployments
+* Infrastructure validation
+* Safe resource cleanup
+* Operational visibility
+* Production-style automation
+
+---
+
+## Summary
 
 The deployment process demonstrates a complete infrastructure lifecycle including:
 
