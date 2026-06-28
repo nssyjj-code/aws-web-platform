@@ -4,6 +4,10 @@
 
 The AWS Web Platform is a production-style three-tier web application environment deployed entirely within AWS.
 
+This document provides a high-level overview of the platform
+architecture, core AWS services, networking model, security
+design, operational workflows, and supporting infrastructure.
+
 The platform demonstrates enterprise cloud architecture principles including:
 
 * High availability
@@ -13,11 +17,15 @@ The platform demonstrates enterprise cloud architecture principles including:
 * Operational monitoring
 * Disaster recovery planning
 
-Infrastructure is provisioned through AWS CLI automation and follows repeatable deployment and validation processes.
+Infrastructure is provisioned through AWS CLI automation and
+follows repeatable deployment and validation processes.
 
 ---
 
 ## Architecture Diagram
+
+The following diagram illustrates the major infrastructure
+components and the flow of traffic through the platform.
 
 ![Architecture Diagram](./diagrams/architecture.svg)
 
@@ -29,7 +37,9 @@ The architecture was designed around the following principles:
 
 ### High Availability
 
-Critical infrastructure components are deployed across multiple Availability Zones to reduce the impact of individual infrastructure failures.
+Critical infrastructure components are deployed across multiple
+Availability Zones to reduce the impact of individual infrastructure
+failures.
 
 ### Security by Default
 
@@ -359,12 +369,26 @@ docs/operations/incident-scenarios.md
 
 ---
 
-## Related Architecture Decisions
+## Related Documentation
 
 Key design decisions are documented in:
 
+### Architecture Decision Records
+
 ```text
 docs/architecture/architecture-decisions.md
+```
+
+### Network Design
+
+```text
+docs/architecture/network-design.md
+```
+
+### Deployment Documentation
+
+```text
+docs/deployment/deployment-guide.md
 ```
 
 Topics include:
@@ -375,6 +399,19 @@ Topics include:
 * Auto Scaling design
 * Monitoring strategy
 * Systems Manager access model
+
+---
+
+## Design Goals
+
+The architecture was intentionally designed to demonstrate:
+
+* High availability
+* Fault tolerance
+* Secure networking
+* Infrastructure automation
+* Operational readiness
+* Production-style AWS design patterns
 
 ---
 
@@ -389,4 +426,6 @@ The AWS Web Platform demonstrates a production-style AWS architecture that empha
 * Monitoring
 * Operational maintainability
 
-The design intentionally mirrors common enterprise AWS deployment patterns while remaining practical for learning, demonstration, and portfolio purposes.
+The design intentionally mirrors common enterprise AWS deployment
+patterns while remaining practical for learning, demonstration,
+and portfolio purposes.
