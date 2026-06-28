@@ -12,11 +12,11 @@ The project provisions a highly available three-tier web application environment
 
 ---
 
-# Architecture Overview
+## Architecture Overview
 
 ![AWS Production Web Platform Architecture](docs/architecture/diagrams/architecture.svg)
 
-## High-Level Design
+### High-Level Design
 
 ```text
 Internet
@@ -49,9 +49,9 @@ Aurora MySQL Cluster
 
 ---
 
-# Technologies Used
+## Technologies Used
 
-## AWS Services
+### AWS Services
 
 * Amazon VPC
 * Amazon EC2
@@ -65,7 +65,7 @@ Aurora MySQL Cluster
 * CloudWatch
 * Systems Manager (SSM)
 
-## Languages & Tools
+### Languages & Tools
 
 * Bash
 * AWS CLI v2
@@ -76,7 +76,7 @@ Aurora MySQL Cluster
 
 ---
 
-# Skills Demonstrated
+## Skills Demonstrated
 
 This project demonstrates practical experience with:
 
@@ -122,9 +122,9 @@ This project demonstrates practical experience with:
 
 ---
 
-# Features
+## Features
 
-## Infrastructure
+### Infrastructure
 
 * Multi-AZ VPC architecture
 * Public and private subnet segmentation
@@ -132,28 +132,28 @@ This project demonstrates practical experience with:
 * Layered security group model
 * IAM-based EC2 access
 
-## Compute
+### Compute
 
 * Launch Templates
 * Auto Scaling Group
 * Automated instance replacement
 * EC2 bootstrap automation via user-data
 
-## Load Balancing
+### Load Balancing
 
 * Application Load Balancer
 * Target Groups
 * Health checks
 * Cross-AZ traffic distribution
 
-## Database
+### Database
 
 * Aurora MySQL Cluster
 * Private database deployment
 * Dedicated DB subnet group
 * Security group isolation
 
-## Automation
+### Automation
 
 * Configuration-driven deployments
 * Shared helper libraries
@@ -164,9 +164,9 @@ This project demonstrates practical experience with:
 
 ---
 
-# Quick Start
+## Quick Start
 
-## Prerequisites
+### Prerequisites
 
 * AWS Account
 * AWS CLI v2
@@ -189,7 +189,7 @@ aws sts get-caller-identity
 
 ---
 
-## Database Credentials
+### Database Credentials
 
 Aurora credentials are intentionally excluded from source control.
 
@@ -202,7 +202,7 @@ export DB_MASTER_PASSWORD="ReplaceWithAStrongPassword"
 
 ---
 
-## Deploy
+### Deploy
 
 Deploy the entire platform:
 
@@ -212,7 +212,7 @@ Deploy the entire platform:
 
 ---
 
-## Verify
+### Verify
 
 Validate deployed resources:
 
@@ -222,7 +222,7 @@ Validate deployed resources:
 
 ---
 
-## Destroy
+### Destroy
 
 Remove all deployed resources:
 
@@ -232,7 +232,7 @@ Remove all deployed resources:
 
 ---
 
-# Repository Structure
+## Repository Structure
 
 ```text
 aws-web-platform/
@@ -258,9 +258,9 @@ aws-web-platform/
 
 ---
 
-# Documentation
+## Documentation
 
-## Architecture
+### Architecture
 
 * Architecture Overview
 * Architecture Decisions
@@ -272,7 +272,7 @@ Location:
 docs/architecture/
 ```
 
-## Deployment
+### Deployment
 
 * Deployment Guide
 * Automation Design
@@ -285,7 +285,7 @@ Location:
 docs/deployment/
 ```
 
-## Operations
+### Operations
 
 * Monitoring Strategy
 * Operational Runbook
@@ -299,7 +299,7 @@ Location:
 docs/operations/
 ```
 
-## Governance
+### Governance
 
 * Security Design
 * Cost Optimization
@@ -312,7 +312,7 @@ docs/governance/
 
 ---
 
-# Monitoring
+## Monitoring
 
 The platform includes CloudWatch monitoring automation.
 
@@ -334,7 +334,7 @@ Examples include:
 
 ---
 
-# Security Highlights
+## Security Highlights
 
 * No AWS credentials stored in source control
 * EC2 IAM roles instead of access keys
@@ -361,7 +361,7 @@ Database Tier
 
 ---
 
-# Lessons Learned
+## Lessons Learned
 
 A dedicated engineering retrospective documents key lessons learned while building and operating the platform, including:
 
@@ -380,7 +380,7 @@ docs/operations/lessons-learned.md
 
 ---
 
-# Future Roadmap
+## Future Roadmap
 
 Planned enhancements include:
 
@@ -396,7 +396,7 @@ Planned enhancements include:
 
 ---
 
-# Why This Project Exists
+## Why This Project Exists
 
 Many AWS portfolio projects focus only on resource creation.
 
@@ -415,6 +415,6 @@ The goal is to demonstrate the responsibilities commonly performed by Cloud Engi
 
 ---
 
-# License
+## License
 
 This project is licensed under the MIT License.
