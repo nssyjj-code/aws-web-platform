@@ -4,11 +4,19 @@
 [![ShellCheck](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/shellcheck.yml)
 [![Validate Shell Syntax](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/validate-shell.yml/badge.svg)](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/validate-shell.yml)
 
-A production-style AWS infrastructure platform built with Bash and the AWS CLI to demonstrate cloud engineering, automation, networking, security, operational readiness, and infrastructure lifecycle management.
+A production-style AWS infrastructure platform built with Bash
+and the AWS CLI to demonstrate cloud engineering, automation,
+networking, security, operational readiness, and infrastructure
+lifecycle management.
 
-The project provisions a highly available three-tier web application environment across multiple Availability Zones using modular, idempotent deployment automation and AWS managed services.
+The project provisions a highly available three-tier web application
+environment across multiple Availability Zones using modular,
+idempotent deployment automation and AWS managed services.
 
-> This project was intentionally built using AWS CLI automation before transitioning to Terraform in order to develop a deeper understanding of AWS service dependencies, infrastructure provisioning workflows, and operational troubleshooting.
+> This project was intentionally built using AWS CLI automation before
+> transitioning to Terraform in order to develop a deeper understanding
+> of AWS service dependencies, infrastructure provisioning workflows,
+> and operational troubleshooting.
 
 ---
 
@@ -49,7 +57,7 @@ Aurora MySQL Cluster
 
 ---
 
-## Technologies Used
+## Technology Stack
 
 ### AWS Services
 
@@ -73,6 +81,24 @@ Aurora MySQL Cluster
 * GitHub
 * Draw.io
 * ShellCheck
+
+---
+
+## Project Goals
+
+This project was designed to demonstrate production-style Cloud Engineering
+practices using native AWS services and Bash automation.
+
+Primary objectives include:
+
+- Infrastructure automation
+- High availability
+- Security best practices
+- Multi-tier networking
+- Operational readiness
+- Monitoring
+- Infrastructure validation
+- Repeatable deployments
 
 ---
 
@@ -229,6 +255,43 @@ Remove all deployed resources:
 ```bash
 ./destroy.sh
 ```
+
+---
+
+## Validation Results
+
+The platform has been successfully validated using the
+complete deployment lifecycle.
+
+### Deployment Workflow
+
+```text
+deploy.sh
+
+↓
+
+verify.sh
+
+↓
+
+destroy.sh
+```
+
+### Validation Summary
+
+Successful validation confirms:
+
+- Multi-AZ VPC deployment
+- Public/private subnet segmentation
+- Internet-facing ALB
+- Auto Scaling Group
+- Healthy Target Group
+- Launch Template
+- Aurora MySQL
+- Security Groups
+- NAT Gateway routing
+- Private EC2 instances
+- Automated teardown
 
 ---
 
