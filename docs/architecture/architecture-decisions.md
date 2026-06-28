@@ -4,7 +4,10 @@
 
 This document records the major architecture decisions made for the AWS Web Platform.
 
-The purpose of these Architecture Decision Records (ADRs) is to document not only what was built, but why specific AWS services, networking patterns, security controls, and operational practices were selected.
+The purpose of these Architecture Decision Records (ADRs) is to
+document not only what was built, but why specific AWS services,
+networking patterns, security controls, and operational practices
+were selected.
 
 Each ADR contains:
 
@@ -14,19 +17,40 @@ Each ADR contains:
 * Consequences
 * Alternatives Considered
 
+These records provide a historical reference for why architectural
+choices were made and document the tradeoffs considered during the
+design and implementation of the platform.
+
 ---
 
-# ADR-001: Use a Three-Tier Architecture
+## ADR Format
 
-## Status
+Each Architecture Decision Record contains:
+
+* Status
+* Context
+* Decision
+* Consequences
+* Alternatives Considered
+
+This format documents not only the implementation decisions made
+throughout the project but also the engineering tradeoffs that led
+to those decisions.
+
+---
+
+## ADR-001: Use a Three-Tier Architecture
+
+### Status
 
 Accepted
 
-## Context
+### Context
 
-The project required a production-style web platform that separates public traffic handling, application compute, and database services.
+The project required a production-style web platform that separates
+public traffic handling, application compute, and database services.
 
-## Decision
+### Decision
 
 Use a three-tier architecture:
 
@@ -36,21 +60,21 @@ Application Tier  → EC2 Instances in Auto Scaling Group
 Database Tier     → Aurora MySQL
 ```
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Clear separation of responsibilities
 * Improved security boundaries
 * Easier horizontal scaling
 * Aligns with common enterprise cloud patterns
 
-### Negative
+#### Negative
 
 * Increased deployment complexity
 * Higher infrastructure costs than a single-instance design
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative                             | Reason Not Selected                                                |
 | --------------------------------------- | ------------------------------------------------------------------ |
@@ -60,34 +84,35 @@ Database Tier     → Aurora MySQL
 
 ---
 
-# ADR-002: Use Multi-AZ Networking
+## ADR-002: Use Multi-AZ Networking
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 The platform should avoid dependence on a single Availability Zone.
 
-## Decision
+### Decision
 
-Deploy public, private application, and private database subnets across two Availability Zones.
+Deploy public, private application, and private database
+subnets across two Availability Zones.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Improved availability
 * Better fault isolation
 * Supports resilient infrastructure design
 
-### Negative
+#### Negative
 
 * Increased NAT Gateway costs
 * Additional networking complexity
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative          | Reason Not Selected                                |
 | -------------------- | -------------------------------------------------- |
@@ -96,34 +121,34 @@ Deploy public, private application, and private database subnets across two Avai
 
 ---
 
-# ADR-003: Place Application Instances in Private Subnets
+## ADR-003: Place Application Instances in Private Subnets
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Application servers must serve public traffic while minimizing direct exposure.
 
-## Decision
+### Decision
 
 Deploy EC2 application instances into private subnets.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Reduced attack surface
 * No public IPs required
 * Supports least-privilege network design
 
-### Negative
+#### Negative
 
 * Requires NAT Gateways for outbound internet access
 * Slightly more complex troubleshooting
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative               | Reason Not Selected                      |
 | ------------------------- | ---------------------------------------- |
@@ -133,35 +158,36 @@ Deploy EC2 application instances into private subnets.
 
 ---
 
-# ADR-004: Use an Application Load Balancer
+## ADR-004: Use an Application Load Balancer
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
-The platform requires public web access and traffic distribution across multiple application instances.
+The platform requires public web access and traffic distribution
+across multiple application instances.
 
-## Decision
+### Decision
 
 Use an internet-facing Application Load Balancer.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Native health checks
 * Traffic distribution
 * Auto Scaling integration
 * High availability
 
-### Negative
+#### Negative
 
 * Additional monthly cost
 * Additional infrastructure component to manage
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative                | Reason Not Selected                          |
 | -------------------------- | -------------------------------------------- |
@@ -171,35 +197,35 @@ Use an internet-facing Application Load Balancer.
 
 ---
 
-# ADR-005: Use Auto Scaling Groups
+## ADR-005: Use Auto Scaling Groups
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Application instances should be replaceable and horizontally scalable.
 
-## Decision
+### Decision
 
 Deploy EC2 instances through an Auto Scaling Group using a Launch Template.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Self-healing infrastructure
 * Automated instance replacement
 * Consistent deployments
 * Multi-AZ distribution
 
-### Negative
+#### Negative
 
 * Additional operational complexity
 * Requires monitoring and health checks
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative                     | Reason Not Selected                   |
 | ------------------------------- | ------------------------------------- |
@@ -209,35 +235,35 @@ Deploy EC2 instances through an Auto Scaling Group using a Launch Template.
 
 ---
 
-# ADR-006: Use Aurora MySQL
+## ADR-006: Use Aurora MySQL
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 The platform requires a managed relational database service.
 
-## Decision
+### Decision
 
 Use Amazon Aurora MySQL.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Managed service
 * High availability features
 * Automated backups
 * MySQL compatibility
 
-### Negative
+#### Negative
 
 * Higher cost than standard MySQL deployments
 * AWS-specific implementation
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative  | Reason Not Selected                                                           |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -247,34 +273,34 @@ Use Amazon Aurora MySQL.
 
 ---
 
-# ADR-007: Use NAT Gateways
+## ADR-007: Use NAT Gateways
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Private application instances require outbound internet access.
 
-## Decision
+### Decision
 
 Deploy NAT Gateways in public subnets.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Private instances can access the internet securely
 * No inbound internet exposure
 * Managed AWS service
 
-### Negative
+#### Negative
 
 * One of the largest recurring cost components
 * Additional networking dependencies
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative                | Reason Not Selected              |
 | -------------------------- | -------------------------------- |
@@ -284,17 +310,17 @@ Deploy NAT Gateways in public subnets.
 
 ---
 
-# ADR-008: Use Security Group Referencing
+## ADR-008: Use Security Group Referencing
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Traffic between tiers should be tightly controlled.
 
-## Decision
+### Decision
 
 Use Security Group references rather than broad CIDR rules.
 
@@ -308,19 +334,19 @@ Application Security Group
 Database Security Group
 ```
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Least-privilege communication
 * Easier maintenance
 * Improved security posture
 
-### Negative
+#### Negative
 
 * Requires dependency-aware deployments
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative            | Reason Not Selected   |
 | ---------------------- | --------------------- |
@@ -330,36 +356,38 @@ Database Security Group
 
 ---
 
-# ADR-009: Use AWS CLI Automation
+## ADR-009: Use AWS CLI Automation
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 The project required repeatable infrastructure deployment while reinforcing AWS service-level knowledge.
 
-## Decision
+### Decision
 
 Deploy infrastructure using AWS CLI automation scripts.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Demonstrates AWS service knowledge
 * Highlights resource dependencies
 * Enables repeatable deployments
 
-### Negative
+#### Negative
 
 * Manual dependency management
 * No state management
 
-## Alternatives Considered
+### Alternatives Considered
 
-The platform intentionally uses AWS CLI automation to reinforce understanding of AWS APIs, service dependencies, infrastructure lifecycle management, and troubleshooting. Terraform is identified as the logical evolution for production infrastructure management once foundational AWS concepts have been demonstrated.
+The platform intentionally uses AWS CLI automation to reinforce
+understanding of AWS APIs, service dependencies, infrastructure
+lifecycle management, and troubleshooting.
 
 | Alternative       | Reason Not Selected                                                                |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -367,7 +395,7 @@ The platform intentionally uses AWS CLI automation to reinforce understanding of
 | CloudFormation    | Strong AWS-native option, but not the focus of this project                        |
 | Manual deployment | Not repeatable                                                                     |
 
-## Future Evolution
+### Future Evolution
 
 If this platform were maintained long term, Terraform would likely become the preferred deployment method due to:
 
@@ -378,33 +406,33 @@ If this platform were maintained long term, Terraform would likely become the pr
 
 ---
 
-# ADR-010: Use Automated Infrastructure Teardown
+## ADR-010: Use Automated Infrastructure Teardown
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Development environments can generate unnecessary cost when left running.
 
-## Decision
+### Decision
 
 Implement a dependency-aware destroy process.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Cost control
 * Demonstrates lifecycle ownership
 * Safe resource cleanup
 
-### Negative
+#### Negative
 
 * Additional development effort
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative             | Reason Not Selected       |
 | ----------------------- | ------------------------- |
@@ -414,34 +442,34 @@ Implement a dependency-aware destroy process.
 
 ---
 
-# ADR-011: Use CloudWatch for Monitoring
+## ADR-011: Use CloudWatch for Monitoring
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 The platform requires operational visibility into infrastructure health and application availability.
 
-## Decision
+### Decision
 
 Use Amazon CloudWatch dashboards and alarms.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * Native AWS integration
 * Infrastructure monitoring
 * Alarm notifications
 * Auto Scaling visibility
 
-### Negative
+#### Negative
 
 * AWS-specific monitoring implementation
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative            | Reason Not Selected             |
 | ---------------------- | ------------------------------- |
@@ -451,34 +479,34 @@ Use Amazon CloudWatch dashboards and alarms.
 
 ---
 
-# ADR-012: Use AWS Systems Manager Instead of SSH
+## ADR-012: Use AWS Systems Manager Instead of SSH
 
-## Status
+### Status
 
 Accepted
 
-## Context
+### Context
 
 Administrative access to EC2 instances should minimize exposure and operational overhead.
 
-## Decision
+### Decision
 
 Use AWS Systems Manager Session Manager rather than direct SSH access.
 
-## Consequences
+### Consequences
 
-### Positive
+#### Positive
 
 * No inbound SSH ports required
 * Reduced attack surface
 * Centralized auditing
 * No SSH key management
 
-### Negative
+#### Negative
 
 * Requires SSM permissions and agent availability
 
-## Alternatives Considered
+### Alternatives Considered
 
 | Alternative       | Reason Not Selected                      |
 | ----------------- | ---------------------------------------- |
@@ -488,32 +516,99 @@ Use AWS Systems Manager Session Manager rather than direct SSH access.
 
 ---
 
-ADR-013: Centralized Environment Configuration
+## ADR-013: Centralized Environment Configuration
 
-Decision:
-Use a shared environment.conf file for non-secret deployment configuration.
+### Status
 
-Benefits:
-- Eliminates duplicated values
-- Simplifies environment changes
-- Keeps deployment scripts generic
-- Improves maintainability
+Accepted
 
-Alternatives:
-- Hardcoded variables
-- Per-script configuration
+### Context
 
-ADR-014: Configuration-Driven Deployment
+The project requires deployment configuration to be centralized
+instead of duplicated across multiple scripts.
 
-Decision:
-Drive infrastructure deployment from centralized configuration and reusable shell libraries.
+### Decision
 
-Benefits:
-- Reusable automation
-- Easier maintenance
-- Cleaner deployment logic
+Use a shared `environment.conf` file for all non-secret deployment
+configuration.
 
-# Summary
+### Consequences
+
+#### Positive
+
+* Eliminates duplicated configuration
+* Simplifies environment changes
+* Improves maintainability
+* Keeps deployment scripts generic
+
+#### Negative
+
+* Requires validation of configuration before deployment
+
+### Alternatives Considered
+
+| Alternative | Reason Not Selected |
+|------------|---------------------|
+| Hardcoded variables | Difficult to maintain |
+| Per-script configuration | Configuration drift |
+
+---
+
+## ADR-014: Configuration-Driven Deployment
+
+### Status
+
+Accepted
+
+### Context
+
+The platform consists of multiple AWS resources that have deployment
+dependencies and shared configuration values. Duplicating deployment
+logic and configuration across individual scripts would increase
+maintenance effort, introduce configuration drift, and make future
+enhancements more difficult.
+
+### Decision
+
+Implement a configuration-driven deployment model that separates
+configuration from deployment logic.
+
+The platform uses:
+
+* A centralized `environment.conf` file for deployment configuration
+* Shared Bash libraries under `scripts/lib/`
+* Modular deployment scripts responsible for individual AWS services
+* Root-level wrapper scripts that orchestrate the complete deployment,
+  verification, and teardown workflows
+
+### Consequences
+
+#### Positive
+
+* Promotes reusable deployment automation
+* Simplifies maintenance and future enhancements
+* Reduces duplicated code across deployment scripts
+* Enables consistent deployments across environments
+* Improves readability through separation of concerns
+
+#### Negative
+
+* Introduces dependencies between deployment modules
+* Requires configuration validation before deployment
+* Increases the initial design complexity compared to standalone scripts
+
+### Alternatives Considered
+
+| Alternative                                       | Reason Not Selected                                                             |
+| ------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Monolithic deployment script                      | Difficult to maintain as the project grows                                      |
+| Independent scripts with duplicated configuration | Increased maintenance and risk of configuration drift                           |
+| Hardcoded resource values                         | Poor portability and difficult to reuse                                         |
+| Terraform modules                                 | Planned future evolution, but outside the scope of this AWS CLI-focused project |
+
+---
+
+## Summary
 
 These architecture decisions balance:
 
@@ -523,4 +618,6 @@ These architecture decisions balance:
 * Operational complexity
 * Educational value
 
-The project intentionally favors production-style AWS design patterns while documenting tradeoffs, operational considerations, and future evolution paths.
+The project intentionally favors production-style AWS design
+patterns while documenting architectural tradeoffs, operational
+considerations, and future evolution paths.
