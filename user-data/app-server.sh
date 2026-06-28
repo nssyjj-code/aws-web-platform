@@ -35,7 +35,7 @@ echo "[INFO] Updating system packages..."
 dnf update -y
 
 echo "[INFO] Installing required packages..."
-dnf install -y httpd curl jq
+dnf install -y httpd jq
 
 echo "[INFO] Enabling and starting Apache..."
 systemctl enable httpd
