@@ -10,7 +10,8 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
     exit 1
 fi
 
-# shellcheck source=../../config/environment.conf
+# shellcheck source=/dev/null
+# shellcheck disable=SC1091
 source "$CONFIG_FILE"
 
 AWS_REGION="${AWS_REGION:-us-east-1}"
