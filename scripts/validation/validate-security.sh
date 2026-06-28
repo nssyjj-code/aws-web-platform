@@ -119,18 +119,20 @@ validate_no_public_database_access() {
 
 validate_instances_private() {
   local vpc_id="$1"
+  local public_instances
 
-  local public_instance_count
-  public_instance_count="$(aws_cli ec2 describe-instances \
+  public_instances="$(aws_cli ec2 describe-instances \
     --filters \
       "Name=vpc-id,Values=$vpc_id" \
       "Name=tag:Project,Values=$PROJECT_NAME" \
-      "Name=instance-state-name,Values=pending,running,stopping,stopped" \
-    --query "Reservations[].Instances[?PublicIpAddress!=null].InstanceId | length(@)" \
-    --output text 2>/dev/null || echo "0")"
+      "Name=tag:Tier,Values=app" \
+      "Name=instance-state-name,Values=running" \
+    --query "Reservations[].Instances[?PublicIpAddress != null].[InstanceId,PublicIpAddress,SubnetId]" \
+    --output text 2>/dev/null || true)"
 
-  if [[ "$public_instance_count" != "0" ]]; then
-    log_error "Application instances with public IPs detected: $public_instance_count"
+  if [[ -n "$public_instances" ]]; then
+    log_error "Application instances with public IPs detected:"
+    echo "$public_instances"
     exit 1
   fi
 
