@@ -1,4 +1,8 @@
-# AWS Production Web Platform
+# AWS Web Platform
+
+[![Markdown Lint](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/markdown-lint.yml)
+[![ShellCheck](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/shellcheck.yml)
+[![Validate Shell Syntax](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/validate-shell.yml/badge.svg)](https://github.com/nssyjj-code/aws-web-platform/actions/workflows/validate-shell.yml)
 
 A production-style AWS infrastructure platform built with Bash and the AWS CLI to demonstrate cloud engineering, automation, networking, security, operational readiness, and infrastructure lifecycle management.
 
