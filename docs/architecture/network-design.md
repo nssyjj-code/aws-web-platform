@@ -4,7 +4,10 @@
 
 This document describes the networking architecture used by the AWS Web Platform.
 
-The environment is deployed within a dedicated Amazon Virtual Private Cloud (VPC) and follows a multi-tier network design that separates public-facing resources, application services, and database services.
+The environment is deployed within a dedicated Amazon Virtual
+Private Cloud (VPC) and follows a multi-tier network design that
+separates public-facing resources, application services, and
+database services.
 
 The design emphasizes:
 
@@ -14,6 +17,10 @@ The design emphasizes:
 * Network segmentation
 * Operational simplicity
 * Production-style AWS networking patterns
+
+This document describes the logical and physical network
+architecture, routing model, subnet strategy, security boundaries,
+and operational considerations used throughout the platform.
 
 ---
 
@@ -27,7 +34,8 @@ Only required communication paths are permitted between tiers.
 
 ### Defense in Depth
 
-Security controls exist at multiple layers including subnet placement, route tables, security groups, and IAM controls.
+Security controls exist at multiple layers including subnet
+placement, route tables, security groups, and IAM controls.
 
 ### High Availability
 
@@ -300,7 +308,7 @@ Tradeoff:
 
 ---
 
-## Security Boundaries
+## Network Security Architecture
 
 The network follows a layered security model.
 
@@ -392,6 +400,7 @@ Future enhancements may include:
 * S3 Gateway Endpoints
 * Systems Manager Interface Endpoints
 * CloudWatch Interface Endpoints
+* AWS Secrets Manager Interface Endpoint
 
 Benefits:
 
@@ -462,7 +471,8 @@ Potential future optimizations:
 
 ## Related Architecture Decisions
 
-Relevant Architecture Decision Records:
+This design is supported by the following Architecture Decision
+Records (ADRs):
 
 ```text
 ADR-002 Multi-AZ Networking
@@ -476,6 +486,19 @@ Reference:
 ```text
 docs/architecture/architecture-decisions.md
 ```
+
+---
+
+## Design Goals
+
+The network architecture was intentionally designed to demonstrate:
+
+* Multi-tier AWS networking
+* High availability
+* Secure network segmentation
+* Least-privilege communication
+* Production-style routing
+* Infrastructure automation
 
 ---
 
