@@ -59,7 +59,12 @@ fi
 
 ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
 CALLER_ARN="$(aws sts get-caller-identity --query Arn --output text)"
-AWS_REGION="$(aws configure get region)"
+AWS_REGION="$(aws configure get region 2>/dev/null || true)"
+
+if [[ -z "${AWS_REGION:-}" ]]; then
+    AWS_REGION="us-east-1"
+    log_warning "No default AWS region configured. Using fallback region: $AWS_REGION"
+fi
 
 if [[ -z "${AWS_REGION:-}" ]]; then
     log_error "No default AWS region configured."
