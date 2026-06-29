@@ -4,21 +4,26 @@
 
 This document describes the monitoring and observability strategy for the AWS Web Platform.
 
-Monitoring provides visibility into application availability, infrastructure health, performance, capacity utilization, and operational events.
+Monitoring provides visibility into application availability, infrastructure health, performance, 
+capacity utilization, and operational events.
 
-The objective is to detect failures quickly, support troubleshooting, and reduce Mean Time To Detect (MTTD) and Mean Time To Recover (MTTR).
+The objective is to detect failures quickly, support troubleshooting, 
+and reduce Mean Time To Detect (MTTD) and Mean Time To Recover (MTTR).
 
 ---
 
 ## Intended Audience
 
-This document is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers, and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
+This document is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers, 
+and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
 
-It describes the monitoring strategy, operational dashboards, alerting philosophy, and observability practices used to detect, investigate, and respond to infrastructure and application events.
+It describes the monitoring strategy, operational dashboards, alerting philosophy, 
+and observability practices used to detect, investigate, and respond to infrastructure and application events.
 
 ## Monitoring Philosophy
 
-Effective monitoring is not measured by the number of alarms configured, but by the ability to detect meaningful failures quickly while minimizing false positives.
+Effective monitoring is not measured by the number of alarms configured, but 
+by the ability to detect meaningful failures quickly while minimizing false positives.
 
 The monitoring strategy emphasizes:
 
@@ -28,7 +33,7 @@ The monitoring strategy emphasizes:
 - Operational visibility
 - Continuous improvement through incident reviews
 
-# Monitoring Objectives
+## Monitoring Objectives
 
 The monitoring strategy focuses on five primary objectives:
 
@@ -42,7 +47,7 @@ Monitoring should provide sufficient visibility to identify service degradation 
 
 ---
 
-# Monitoring Architecture
+## Monitoring Architecture
 
 The platform uses AWS-native monitoring services.
 
@@ -81,7 +86,7 @@ Email / Chat Notifications
 
 ---
 
-# Service Level Indicators (SLIs)
+## Service Level Indicators (SLIs)
 
 The platform tracks operational indicators that reflect overall service health.
 
@@ -112,7 +117,7 @@ The following objectives guide operational monitoring.
 | Infrastructure Recovery | ≤ 60 Minutes |
 | Incident Detection | ≤ 5 Minutes |
 
-# Monitoring Coverage Matrix
+## Monitoring Coverage Matrix
 
 | Layer                     | Monitoring Focus               |
 | ------------------------- | ------------------------------ |
@@ -125,9 +130,9 @@ The following objectives guide operational monitoring.
 
 ---
 
-# Application Load Balancer Monitoring
+## Application Load Balancer Monitoring
 
-## Key Metrics
+### Key Metrics
 
 Monitor:
 
@@ -140,9 +145,9 @@ Monitor:
 
 ---
 
-## Critical Alerts
+### Critical Alerts
 
-### Unhealthy Targets
+#### Unhealthy Targets
 
 Alarm:
 
@@ -162,7 +167,7 @@ SEV-2
 
 ---
 
-### Elevated 5XX Errors
+#### Elevated 5XX Errors
 
 Alarm:
 
@@ -182,9 +187,9 @@ SEV-2
 
 ---
 
-# EC2 Monitoring
+## EC2 Monitoring
 
-## Key Metrics
+### Key Metrics
 
 Monitor:
 
@@ -197,9 +202,9 @@ Monitor:
 
 ---
 
-## Example Alerts
+### Example Alerts
 
-### High CPU Utilization
+#### High CPU Utilization
 
 Alarm:
 
@@ -222,7 +227,7 @@ SEV-3
 
 ---
 
-### Failed Instance Health Checks
+#### Failed Instance Health Checks
 
 Alarm:
 
@@ -242,9 +247,9 @@ SEV-2
 
 ---
 
-# Auto Scaling Monitoring
+## Auto Scaling Monitoring
 
-## Key Metrics
+### Key Metrics
 
 Monitor:
 
@@ -255,7 +260,7 @@ Monitor:
 
 ---
 
-## Capacity Alert
+### Capacity Alert
 
 Alarm:
 
@@ -275,9 +280,9 @@ SEV-2
 
 ---
 
-# Aurora Monitoring
+## Aurora Monitoring
 
-## Key Metrics
+### Key Metrics
 
 Monitor:
 
@@ -289,9 +294,9 @@ Monitor:
 
 ---
 
-## Example Alerts
+### Example Alerts
 
-### High Connection Count
+#### High Connection Count
 
 Alarm:
 
@@ -311,7 +316,7 @@ SEV-3
 
 ---
 
-### Elevated Database Latency
+#### Elevated Database Latency
 
 Alarm:
 
@@ -331,9 +336,9 @@ SEV-2
 
 ---
 
-# Networking Monitoring
+## Networking Monitoring
 
-## NAT Gateway
+### NAT Gateway
 
 Monitor:
 
@@ -348,7 +353,7 @@ Validate outbound internet access for private application resources.
 
 ---
 
-## Route Validation
+### Route Validation
 
 Monitor:
 
@@ -362,13 +367,13 @@ Detect networking failures before they impact applications.
 
 ---
 
-# Logging Strategy
+## Logging Strategy
 
 Monitoring and logging are complementary disciplines.
 
 ---
 
-## AWS CloudTrail
+### AWS CloudTrail
 
 Purpose:
 
@@ -378,7 +383,7 @@ Purpose:
 
 ---
 
-## CloudWatch Logs
+### CloudWatch Logs
 
 Purpose:
 
@@ -388,7 +393,7 @@ Purpose:
 
 ---
 
-## VPC Flow Logs
+### VPC Flow Logs
 
 Purpose:
 
@@ -398,13 +403,13 @@ Purpose:
 
 ---
 
-# Operational Dashboards
+## Operational Dashboards
 
 Recommended CloudWatch dashboards:
 
 ---
 
-## Availability Dashboard
+### Availability Dashboard
 
 Display:
 
@@ -415,7 +420,7 @@ Display:
 
 ---
 
-## Compute Dashboard
+### Compute Dashboard
 
 Display:
 
@@ -425,7 +430,7 @@ Display:
 
 ---
 
-## Database Dashboard
+### Database Dashboard
 
 Display:
 
@@ -436,7 +441,7 @@ Display:
 
 ---
 
-## Networking Dashboard
+### Networking Dashboard
 
 Display:
 
@@ -446,7 +451,7 @@ Display:
 
 ---
 
-# Alert Severity Model
+## Alert Severity Model
 
 | Severity | Description               |
 | -------- | ------------------------- |
@@ -459,7 +464,7 @@ Severity levels help prioritize operational response efforts.
 
 ---
 
-## Alert Classification
+### Alert Classification
 
 Alerts are categorized by operational intent.
 
@@ -471,7 +476,7 @@ Alerts are categorized by operational intent.
 | Security | Configuration changes |
 | Infrastructure | Resource failures |
 
-# Incident Detection Workflow
+## Incident Detection Workflow
 
 Monitoring should identify:
 
@@ -506,14 +511,13 @@ Operational procedures are documented in:
 docs/operations/operational-runbook.md
 docs/operations/incident-scenarios.md
 docs/operations/disaster-recovery.md
-docs/operations/incident-scenarios.md
 docs/operations/lessons-learned.md
 docs/deployment/automation-design.md
 ```
 
 ---
 
-# Monitoring Ownership
+## Monitoring Ownership
 
 The platform operations team is responsible for:
 
@@ -527,7 +531,7 @@ Monitoring effectiveness should be reviewed periodically to reduce false positiv
 
 ---
 
-# Future Monitoring Enhancements
+## Future Monitoring Enhancements
 
 Potential improvements include:
 
@@ -549,7 +553,7 @@ Potential improvements include:
 
 ---
 
-# Success Criteria
+## Success Criteria
 
 The monitoring platform should:
 
@@ -564,10 +568,25 @@ Success is measured by reduced MTTD and improved incident response effectiveness
 
 ---
 
-# Summary
+## Design Goals
+
+The monitoring strategy was intentionally designed to demonstrate:
+
+* Production-style observability
+* Proactive infrastructure monitoring
+* Actionable alerting
+* Operational visibility
+* Incident response readiness
+* Cloud-native monitoring practices
+
+---
+
+## Summary
 
 Monitoring is a critical operational capability for maintaining reliable cloud infrastructure.
 
-The monitoring strategy combines metrics, logs, dashboards, alarms, and operational procedures to provide visibility across the networking, compute, database, and application layers.
+The monitoring strategy combines metrics, logs, dashboards, alarms, 
+and operational procedures to provide visibility across the networking, compute, database, and application layers.
 
-The goal is not simply collecting metrics, but enabling rapid detection, effective troubleshooting, and reliable service operation.
+The goal is not simply collecting metrics, but enabling rapid detection, 
+effective troubleshooting, and reliable service operation.
