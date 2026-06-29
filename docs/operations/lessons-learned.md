@@ -2,16 +2,16 @@
 
 ## Overview
 
-This document captures key technical, operational, and architectural lessons learned while designing, 
+This document captures key technical, operational, and architectural lessons learned while designing,
 deploying, troubleshooting, and refining the AWS Web Platform.
 
-The project evolved from a collection of AWS CLI scripts into a dependency-aware deployment 
+The project evolved from a collection of AWS CLI scripts into a dependency-aware deployment
 framework capable of provisioning and validating a multi-tier AWS environment.
 
-Many of the lessons documented here were discovered through troubleshooting real deployment failures, 
+Many of the lessons documented here were discovered through troubleshooting real deployment failures,
 dependency issues, configuration errors, and operational testing.
 
-The goal of this document is to highlight engineering insights gained throughout 
+The goal of this document is to highlight engineering insights gained throughout
 the project rather than simply documenting successful outcomes.
 
 ---
@@ -20,8 +20,8 @@ the project rather than simply documenting successful outcomes.
 
 This retrospective captures the technical, architectural, and operational insights gained throughout the development of the AWS Web Platform.
 
-Rather than documenting only successful outcomes, it records the design changes, 
-implementation challenges, and engineering decisions that improved the platform over time. 
+Rather than documenting only successful outcomes, it records the design changes,
+implementation challenges, and engineering decisions that improved the platform over time.
 The objective is to preserve institutional knowledge, guide future enhancements, and highlight the evolution of the platform.
 
 ## Engineering Principles Reinforced
@@ -488,5 +488,5 @@ Key themes emerged throughout the project:
 * Documentation
 * Recoverability
 
-The final platform reflects not only a deployed AWS environment, but also the engineering 
+The final platform reflects not only a deployed AWS environment, but also the engineering
 practices required to operate and maintain cloud infrastructure in a production-oriented setting.

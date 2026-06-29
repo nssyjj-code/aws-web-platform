@@ -19,7 +19,7 @@ Automation goals include:
 * Idempotent execution
 * Troubleshooting support
 
-This document describes the overall automation architecture, deployment workflow, shared libraries, 
+This document describes the overall automation architecture, deployment workflow, shared libraries,
 validation strategy, and infrastructure lifecycle used throughout the project.
 
 ---

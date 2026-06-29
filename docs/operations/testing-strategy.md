@@ -4,7 +4,7 @@
 
 This document describes the testing and validation approach used for the AWS Web Platform.
 
-Testing is performed throughout the infrastructure lifecycle to verify that 
+Testing is performed throughout the infrastructure lifecycle to verify that
 deployed resources function as expected and satisfy architecture, security, availability, and operational requirements.
 
 The testing strategy focuses on:
@@ -23,17 +23,17 @@ The objective is to ensure deployments are reliable, repeatable, and production-
 
 ## Intended Audience
 
-This document is intended for Cloud Engineers, Cloud Operations Engineers, 
+This document is intended for Cloud Engineers, Cloud Operations Engineers,
 Platform Engineers, and DevOps Engineers responsible for validating, maintaining, and operating the AWS Web Platform.
 
-It defines the testing methodology used throughout the infrastructure 
+It defines the testing methodology used throughout the infrastructure
 lifecycle to verify platform functionality, operational readiness, and production reliability.
 
 ---
 
 ## Testing Philosophy
 
-Infrastructure validation is performed continuously throughout the 
+Infrastructure validation is performed continuously throughout the
 platform lifecycle rather than only after deployment.
 
 Testing focuses on answering three fundamental questions:
@@ -582,8 +582,8 @@ The testing strategy was intentionally designed to demonstrate:
 
 ## Summary
 
-Testing is used to verify that infrastructure, networking, compute, database, security, 
+Testing is used to verify that infrastructure, networking, compute, database, security,
 and operational controls function as expected throughout the platform lifecycle.
 
-The strategy extends beyond deployment validation and includes operational readiness, monitoring validation, 
+The strategy extends beyond deployment validation and includes operational readiness, monitoring validation,
 incident response testing, and disaster recovery verification to better reflect production cloud engineering practices.

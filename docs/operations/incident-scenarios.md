@@ -4,7 +4,7 @@
 
 This document contains simulated production incidents performed against the AWS Web Platform.
 
-The purpose of these scenarios is to demonstrate operational troubleshooting, 
+The purpose of these scenarios is to demonstrate operational troubleshooting,
 incident response, root cause analysis, and recovery procedures.
 
 Each incident follows a structured operational workflow:
@@ -577,7 +577,7 @@ The objective is not eliminating all failures.
 
 The objective is reducing Mean Time To Detect (MTTD) and Mean Time To Recover (MTTR).
 
-These scenarios demonstrate how production-style incidents can be detected, 
+These scenarios demonstrate how production-style incidents can be detected,
 investigated, resolved, and prevented using AWS operational best practices.
 
 ---

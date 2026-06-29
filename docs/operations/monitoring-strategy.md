@@ -4,25 +4,25 @@
 
 This document describes the monitoring and observability strategy for the AWS Web Platform.
 
-Monitoring provides visibility into application availability, infrastructure health, performance, 
+Monitoring provides visibility into application availability, infrastructure health, performance,
 capacity utilization, and operational events.
 
-The objective is to detect failures quickly, support troubleshooting, 
+The objective is to detect failures quickly, support troubleshooting,
 and reduce Mean Time To Detect (MTTD) and Mean Time To Recover (MTTR).
 
 ---
 
 ## Intended Audience
 
-This document is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers, 
+This document is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers,
 and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
 
-It describes the monitoring strategy, operational dashboards, alerting philosophy, 
+It describes the monitoring strategy, operational dashboards, alerting philosophy,
 and observability practices used to detect, investigate, and respond to infrastructure and application events.
 
 ## Monitoring Philosophy
 
-Effective monitoring is not measured by the number of alarms configured, but 
+Effective monitoring is not measured by the number of alarms configured, but
 by the ability to detect meaningful failures quickly while minimizing false positives.
 
 The monitoring strategy emphasizes:
@@ -585,8 +585,8 @@ The monitoring strategy was intentionally designed to demonstrate:
 
 Monitoring is a critical operational capability for maintaining reliable cloud infrastructure.
 
-The monitoring strategy combines metrics, logs, dashboards, alarms, 
+The monitoring strategy combines metrics, logs, dashboards, alarms,
 and operational procedures to provide visibility across the networking, compute, database, and application layers.
 
-The goal is not simply collecting metrics, but enabling rapid detection, 
+The goal is not simply collecting metrics, but enabling rapid detection,
 effective troubleshooting, and reliable service operation.

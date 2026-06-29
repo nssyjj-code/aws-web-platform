@@ -4,18 +4,18 @@
 
 This document describes the disaster recovery (DR) strategy for the AWS Web Platform.
 
-The objective of disaster recovery planning is to restore critical services following infrastructure failures, 
+The objective of disaster recovery planning is to restore critical services following infrastructure failures,
 application outages, configuration errors, or data loss events while minimizing business impact.
 
-The platform leverages AWS managed services, multi-Availability Zone architecture, 
+The platform leverages AWS managed services, multi-Availability Zone architecture,
 automated deployments, and infrastructure lifecycle automation to improve resiliency and simplify recovery operations.
 
 ---
 
 ## Disaster Recovery Strategy
 
-This platform most closely aligns with a warm standby disaster recovery strategy. 
-Critical infrastructure is highly available across multiple Availability Zones within a single AWS Region, 
+This platform most closely aligns with a warm standby disaster recovery strategy.
+Critical infrastructure is highly available across multiple Availability Zones within a single AWS Region,
 while recovery from regional failures relies on infrastructure redeployment rather than active multi-region replication.
 
 ## Disaster Recovery Objectives
@@ -527,7 +527,7 @@ The disaster recovery strategy was intentionally designed to demonstrate:
 
 ## Summary
 
-The disaster recovery strategy combines AWS managed services, multi-Availability Zone architecture, 
+The disaster recovery strategy combines AWS managed services, multi-Availability Zone architecture,
 automated backups, infrastructure automation, and operational procedures to improve resiliency.
 
 The platform emphasizes:
@@ -538,5 +538,5 @@ The platform emphasizes:
 * Reduced operational complexity
 * Continuous recovery validation
 
-The result is a disaster recovery approach that aligns with modern cloud operations 
+The result is a disaster recovery approach that aligns with modern cloud operations
 practices while remaining practical for a development and portfolio environment.

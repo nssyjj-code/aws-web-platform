@@ -2,10 +2,10 @@
 
 ## Overview
 
-This document describes the cost considerations, optimization strategies, 
+This document describes the cost considerations, optimization strategies,
 and architectural tradeoffs associated with the AWS Web Platform.
 
-The platform was intentionally designed to demonstrate production-style AWS architecture 
+The platform was intentionally designed to demonstrate production-style AWS architecture
 patterns while maintaining awareness of infrastructure cost management.
 
 The goal is not simply to minimize spending, but to understand the engineering tradeoffs between:
@@ -100,7 +100,7 @@ Automated teardown helps reduce unnecessary AWS charges and encourages responsib
 
 ## Cost Design Philosophy
 
-This project intentionally prioritizes learning production architecture 
+This project intentionally prioritizes learning production architecture
 patterns over building the lowest-cost AWS environment.
 
 Several architectural decisions increase cost but more accurately reflect real-world enterprise deployments.

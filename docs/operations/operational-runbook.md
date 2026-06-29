@@ -2,7 +2,7 @@
 
 ## Overview
 
-This runbook provides operational procedures for monitoring, troubleshooting, 
+This runbook provides operational procedures for monitoring, troubleshooting,
 maintaining, and recovering the AWS Web Platform.
 
 The objective is to provide repeatable operational guidance
@@ -25,10 +25,10 @@ Covered services:
 
 ## Intended Audience
 
-This runbook is intended for Cloud Engineers, Cloud Operations Engineers, 
+This runbook is intended for Cloud Engineers, Cloud Operations Engineers,
 Platform Engineers, and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
 
-It provides standardized operational procedures for incident response, troubleshooting, 
+It provides standardized operational procedures for incident response, troubleshooting,
 maintenance, service recovery, and post-incident validation.
 
 ---
@@ -592,8 +592,8 @@ This operational runbook was intentionally designed to demonstrate:
 
 ## Summary
 
-This runbook provides operational guidance for maintaining, troubleshooting, 
+This runbook provides operational guidance for maintaining, troubleshooting,
 recovering, and validating the AWS Web Platform.
 
-The objective is not only to deploy infrastructure, but to operate cloud services 
+The objective is not only to deploy infrastructure, but to operate cloud services
 using repeatable procedures that improve reliability, reduce recovery time, and support production-style operations.

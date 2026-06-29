@@ -2,10 +2,10 @@
 
 ## Overview
 
-This document describes the security architecture, controls, 
+This document describes the security architecture, controls,
 and design principles implemented within the AWS Web Platform.
 
-The platform follows a defense-in-depth approach that applies 
+The platform follows a defense-in-depth approach that applies
 security controls across multiple layers of the environment including:
 
 * Network security
@@ -17,7 +17,7 @@ security controls across multiple layers of the environment including:
 * Encryption
 * Operational governance
 
-Security decisions are based on AWS security best practices, 
+Security decisions are based on AWS security best practices,
 the AWS Shared Responsibility Model, and the principle of least privilege.
 
 ---
@@ -583,7 +583,7 @@ The security architecture was intentionally designed to demonstrate:
 
 ## Summary
 
-The AWS Web Platform implements layered security controls across networking, 
+The AWS Web Platform implements layered security controls across networking,
 identity, administration, database protection, and operational monitoring.
 
 The design emphasizes:
@@ -594,5 +594,5 @@ The design emphasizes:
 * Secure administration
 * Future security extensibility
 
-The resulting architecture closely aligns with common security patterns used in modern 
+The resulting architecture closely aligns with common security patterns used in modern
 AWS production environments while remaining practical for development and portfolio use.
