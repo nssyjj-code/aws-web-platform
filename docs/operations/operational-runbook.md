@@ -2,9 +2,12 @@
 
 ## Overview
 
-This runbook provides operational procedures for monitoring, troubleshooting, maintaining, and recovering the AWS Web Platform.
+This runbook provides operational procedures for monitoring, troubleshooting, 
+maintaining, and recovering the AWS Web Platform.
 
-The objective is to provide repeatable operational guidance that enables engineers to quickly identify issues, restore service, and validate platform health.
+The objective is to provide repeatable operational guidance
+that enables engineers to quickly identify issues, restore
+service, and validate platform health.
 
 Covered services:
 
@@ -22,9 +25,11 @@ Covered services:
 
 ## Intended Audience
 
-This runbook is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers, and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
+This runbook is intended for Cloud Engineers, Cloud Operations Engineers, 
+Platform Engineers, and DevOps Engineers responsible for operating and maintaining the AWS Web Platform.
 
-It provides standardized operational procedures for incident response, troubleshooting, maintenance, service recovery, and post-incident validation.
+It provides standardized operational procedures for incident response, troubleshooting, 
+maintenance, service recovery, and post-incident validation.
 
 ---
 
@@ -41,7 +46,7 @@ Operational procedures follow several guiding principles:
 
 ---
 
-# Operational Objectives
+## Operational Objectives
 
 This runbook supports:
 
@@ -55,7 +60,7 @@ The primary goal is to reduce Mean Time To Detect (MTTD) and Mean Time To Recove
 
 ---
 
-# Service Inventory
+## Service Inventory
 
 | Component                 | Responsibility                |
 | ------------------------- | ----------------------------- |
@@ -70,7 +75,7 @@ The primary goal is to reduce Mean Time To Detect (MTTD) and Mean Time To Recove
 
 ---
 
-# Incident Severity Model
+## Incident Severity Model
 
 | Severity | Description               |
 | -------- | ------------------------- |
@@ -83,7 +88,7 @@ Severity should be determined based on customer impact and service availability.
 
 ---
 
-## Escalation Guidelines
+### Escalation Guidelines
 
 Escalate incidents when:
 
@@ -93,7 +98,9 @@ Escalate incidents when:
 - Recovery exceeds established MTTR targets.
 - Root cause cannot be identified within 30 minutes.
 
-# Incident Response Workflow
+---
+
+## Incident Response Workflow
 
 When an incident occurs:
 
@@ -121,11 +128,11 @@ Document Findings
 
 ---
 
-# Initial Incident Response Checklist
+## Initial Incident Response Checklist
 
 Perform the following checks before deep investigation.
 
-## Initial Triage Checklist
+### Initial Triage Checklist
 
 Immediately after receiving an alert:
 
@@ -136,7 +143,7 @@ Immediately after receiving an alert:
 - Review recent infrastructure changes.
 - Notify stakeholders if required.
 
-## Verify AWS Identity
+### Verify AWS Identity
 
 ```bash
 aws sts get-caller-identity
@@ -150,7 +157,7 @@ Confirm:
 
 ---
 
-## Verify Environment Health
+### Verify Environment Health
 
 Execute:
 
@@ -167,9 +174,9 @@ Confirm:
 
 ---
 
-# Load Balancer Operations
+## Load Balancer Operations
 
-## Verify ALB Health
+### Verify ALB Health
 
 ```bash
 aws elbv2 describe-load-balancers \
@@ -184,7 +191,7 @@ State = active
 
 ---
 
-## Verify Target Health
+### Verify Target Health
 
 ```bash
 aws elbv2 describe-target-health \
@@ -206,7 +213,7 @@ Investigate:
 
 ---
 
-## Common Causes
+### Common Causes
 
 * Failed application startup
 * Security group issues
@@ -215,9 +222,9 @@ Investigate:
 
 ---
 
-# EC2 Operations
+## EC2 Operations
 
-## Verify Running Instances
+### Verify Running Instances
 
 ```bash
 aws ec2 describe-instances \
@@ -232,7 +239,7 @@ Confirm:
 
 ---
 
-## Verify Instance Health
+### Verify Instance Health
 
 Review:
 
@@ -243,7 +250,7 @@ Review:
 
 ---
 
-## Replace Failed Instance
+### Replace Failed Instance
 
 Allow Auto Scaling to replace failed instances automatically.
 
@@ -257,9 +264,9 @@ aws autoscaling terminate-instance-in-auto-scaling-group \
 
 ---
 
-# Auto Scaling Operations
+## Auto Scaling Operations
 
-## Verify ASG Status
+### Verify ASG Status
 
 ```bash
 aws autoscaling describe-auto-scaling-groups \
@@ -275,7 +282,7 @@ HealthStatus = Healthy
 
 ---
 
-## Review Scaling Activities
+### Review Scaling Activities
 
 ```bash
 aws autoscaling describe-scaling-activities \
@@ -290,7 +297,7 @@ Review:
 
 ---
 
-## Instance Refresh
+### Instance Refresh
 
 ```bash
 aws autoscaling start-instance-refresh \
@@ -305,9 +312,9 @@ Use when:
 
 ---
 
-# Aurora Operations
+## Aurora Operations
 
-## Verify Cluster Status
+### Verify Cluster Status
 
 ```bash
 aws rds describe-db-clusters \
@@ -322,7 +329,7 @@ Status = available
 
 ---
 
-## Verify Writer Instance
+### Verify Writer Instance
 
 ```bash
 aws rds describe-db-instances \
@@ -337,7 +344,7 @@ DBInstanceStatus = available
 
 ---
 
-## Database Connectivity Validation
+### Database Connectivity Validation
 
 Verify:
 
@@ -360,9 +367,9 @@ Aurora MySQL
 
 ---
 
-# Networking Operations
+## Networking Operations
 
-## Verify Internet Gateway
+### Verify Internet Gateway
 
 ```bash
 aws ec2 describe-internet-gateways
@@ -381,7 +388,7 @@ Expected route:
 
 ---
 
-## Verify NAT Gateway
+### Verify NAT Gateway
 
 ```bash
 aws ec2 describe-nat-gateways
@@ -406,9 +413,9 @@ Expected private route:
 
 ---
 
-# Security Operations
+## Security Operations
 
-## Security Group Validation
+### Security Group Validation
 
 Expected traffic path:
 
@@ -433,9 +440,9 @@ Verify:
 
 ---
 
-# Operational Maintenance
+## Operational Maintenance
 
-## Daily Tasks
+### Daily Tasks
 
 Review:
 
@@ -446,7 +453,7 @@ Review:
 
 ---
 
-## Weekly Tasks
+### Weekly Tasks
 
 Review:
 
@@ -457,7 +464,7 @@ Review:
 
 ---
 
-## Monthly Tasks
+### Monthly Tasks
 
 Review:
 
@@ -468,9 +475,9 @@ Review:
 
 ---
 
-# Recovery Procedures
+## Recovery Procedures
 
-## Application Recovery
+### Application Recovery
 
 Steps:
 
@@ -482,7 +489,7 @@ Steps:
 
 ---
 
-## Database Recovery
+### Database Recovery
 
 Steps:
 
@@ -500,7 +507,7 @@ docs/operations/disaster-recovery.md
 
 ---
 
-## Infrastructure Recovery
+### Infrastructure Recovery
 
 Redeploy platform resources:
 
@@ -516,7 +523,7 @@ Validate:
 
 ---
 
-# Post-Incident Activities
+## Post-Incident Activities
 
 Following service restoration:
 
@@ -534,7 +541,10 @@ docs/operations/incident-response-scenarios.md
 
 ---
 
-## Planned Maintenance
+### Planned Maintenance
+
+Planned maintenance activities should minimize operational
+risk and be performed using repeatable validation procedures.
 
 Before performing planned maintenance:
 
@@ -546,7 +556,9 @@ Before performing planned maintenance:
 6. Monitor for unexpected behavior.
 7. Update operational documentation if required.
 
-# Related Documentation
+---
+
+## Related Documentation
 
 Operational references:
 
@@ -565,8 +577,23 @@ docs/architecture/network-design.md
 
 ---
 
-# Summary
+## Design Goals
 
-This runbook provides operational guidance for maintaining, troubleshooting, recovering, and validating the AWS Web Platform.
+This operational runbook was intentionally designed to demonstrate:
 
-The objective is not only to deploy infrastructure, but to operate cloud services using repeatable procedures that improve reliability, reduce recovery time, and support production-style operations.
+* Production incident response
+* Operational troubleshooting
+* Infrastructure recovery
+* Standardized operational procedures
+* Cloud operations best practices
+* Repeatable service restoration workflows
+
+---
+
+## Summary
+
+This runbook provides operational guidance for maintaining, troubleshooting, 
+recovering, and validating the AWS Web Platform.
+
+The objective is not only to deploy infrastructure, but to operate cloud services 
+using repeatable procedures that improve reliability, reduce recovery time, and support production-style operations.
