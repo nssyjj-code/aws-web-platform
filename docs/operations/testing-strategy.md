@@ -4,7 +4,8 @@
 
 This document describes the testing and validation approach used for the AWS Web Platform.
 
-Testing is performed throughout the infrastructure lifecycle to verify that deployed resources function as expected and satisfy architecture, security, availability, and operational requirements.
+Testing is performed throughout the infrastructure lifecycle to verify that 
+deployed resources function as expected and satisfy architecture, security, availability, and operational requirements.
 
 The testing strategy focuses on:
 
@@ -22,15 +23,18 @@ The objective is to ensure deployments are reliable, repeatable, and production-
 
 ## Intended Audience
 
-This document is intended for Cloud Engineers, Cloud Operations Engineers, Platform Engineers, and DevOps Engineers responsible for validating, maintaining, and operating the AWS Web Platform.
+This document is intended for Cloud Engineers, Cloud Operations Engineers, 
+Platform Engineers, and DevOps Engineers responsible for validating, maintaining, and operating the AWS Web Platform.
 
-It defines the testing methodology used throughout the infrastructure lifecycle to verify platform functionality, operational readiness, and production reliability.
+It defines the testing methodology used throughout the infrastructure 
+lifecycle to verify platform functionality, operational readiness, and production reliability.
 
 ---
 
 ## Testing Philosophy
 
-Infrastructure validation is performed continuously throughout the platform lifecycle rather than only after deployment.
+Infrastructure validation is performed continuously throughout the 
+platform lifecycle rather than only after deployment.
 
 Testing focuses on answering three fundamental questions:
 
@@ -42,7 +46,7 @@ The testing strategy emphasizes repeatability, automation, and operational confi
 
 ---
 
-# Testing Objectives
+## Testing Objectives
 
 The testing strategy is designed to answer the following questions:
 
@@ -73,7 +77,7 @@ The testing strategy is designed to answer the following questions:
 
 ---
 
-# Testing Categories
+## Testing Categories
 
 The platform uses multiple testing categories.
 
@@ -89,13 +93,13 @@ The platform uses multiple testing categories.
 
 ---
 
-# Infrastructure Testing
+## Infrastructure Testing
 
 Infrastructure testing validates successful deployment of AWS resources.
 
 ---
 
-## VPC Validation
+### VPC Validation
 
 Verify VPC deployment:
 
@@ -111,7 +115,7 @@ Expected:
 
 ---
 
-## Subnet Validation
+### Subnet Validation
 
 Verify subnet creation:
 
@@ -128,7 +132,7 @@ Expected:
 
 ---
 
-## Route Validation
+### Route Validation
 
 Verify route tables:
 
@@ -148,13 +152,13 @@ Private Route Tables
 
 ---
 
-# Compute Testing
+## Compute Testing
 
 Compute testing validates application infrastructure.
 
 ---
 
-## Auto Scaling Group Validation
+### Auto Scaling Group Validation
 
 Verify Auto Scaling Group:
 
@@ -171,7 +175,7 @@ HealthStatus = Healthy
 
 ---
 
-## EC2 Validation
+### EC2 Validation
 
 Verify instances:
 
@@ -188,9 +192,9 @@ Expected:
 
 ---
 
-# Load Balancer Testing
+## Load Balancer Testing
 
-## Application Load Balancer Validation
+### Application Load Balancer Validation
 
 Verify ALB:
 
@@ -206,7 +210,7 @@ State = active
 
 ---
 
-## Target Health Validation
+### Target Health Validation
 
 Verify targets:
 
@@ -223,7 +227,7 @@ TargetHealth.State = healthy
 
 ---
 
-## DNS Accessibility Validation
+### DNS Accessibility Validation
 
 Verify:
 
@@ -242,9 +246,9 @@ Expected:
 
 ---
 
-# Database Testing
+## Database Testing
 
-## Aurora Validation
+### Aurora Validation
 
 Verify cluster health:
 
@@ -260,7 +264,7 @@ Status = available
 
 ---
 
-## Aurora Instance Validation
+### Aurora Instance Validation
 
 Verify writer instance:
 
@@ -276,7 +280,7 @@ DBInstanceStatus = available
 
 ---
 
-## Connectivity Validation
+### Connectivity Validation
 
 Verify:
 
@@ -295,9 +299,9 @@ Expected:
 
 ---
 
-# Network Testing
+## Network Testing
 
-## Public Connectivity Testing
+### Public Connectivity Testing
 
 Validate:
 
@@ -315,7 +319,7 @@ Expected:
 
 ---
 
-## Private Connectivity Testing
+### Private Connectivity Testing
 
 Validate:
 
@@ -333,7 +337,7 @@ Expected:
 
 ---
 
-## Outbound Connectivity Testing
+### Outbound Connectivity Testing
 
 Validate:
 
@@ -354,13 +358,13 @@ Expected:
 
 ---
 
-# Security Testing
+## Security Testing
 
 Security testing validates least-privilege architecture.
 
 ---
 
-## Network Isolation Testing
+### Network Isolation Testing
 
 Verify:
 
@@ -370,7 +374,7 @@ Verify:
 
 ---
 
-## Security Group Testing
+### Security Group Testing
 
 Verify:
 
@@ -394,7 +398,7 @@ Expected:
 
 ---
 
-## IAM Validation
+### IAM Validation
 
 Verify:
 
@@ -404,7 +408,7 @@ Verify:
 
 ---
 
-# Systems Manager Testing
+## Systems Manager Testing
 
 Validate administrative access.
 
@@ -419,13 +423,13 @@ Expected:
 
 ---
 
-# Operational Testing
+## Operational Testing
 
 Operational testing validates monitoring and recovery procedures.
 
 ---
 
-## Monitoring Validation
+### Monitoring Validation
 
 Verify:
 
@@ -441,7 +445,7 @@ docs/operations/monitoring-strategy.md
 
 ---
 
-## Incident Response Validation
+### Incident Response Validation
 
 Simulate operational failures.
 
@@ -459,7 +463,7 @@ docs/operations/incident-scenarios.md
 
 ---
 
-# Disaster Recovery Testing
+## Disaster Recovery Testing
 
 Recovery procedures should be tested periodically.
 
@@ -478,7 +482,7 @@ docs/operations/disaster-recovery.md
 
 ---
 
-# Automated Validation
+## Automated Validation
 
 The environment includes automated verification.
 
@@ -497,7 +501,10 @@ Validation confirms:
 
 ---
 
-# Acceptance Criteria
+## Acceptance Criteria
+
+The following criteria define the minimum conditions required
+for a deployment to be considered operationally successful.
 
 A deployment is considered successful when:
 
@@ -532,7 +539,7 @@ A deployment is considered successful when:
 
 ---
 
-# Future Testing Enhancements
+## Future Testing Enhancements
 
 Potential improvements include:
 
@@ -547,7 +554,7 @@ Potential improvements include:
 
 ---
 
-# Related Documentation
+## Related Documentation
 
 Additional references:
 
@@ -560,8 +567,23 @@ docs/operations/operational-runbook.md
 
 ---
 
-# Summary
+## Design Goals
 
-Testing is used to verify that infrastructure, networking, compute, database, security, and operational controls function as expected throughout the platform lifecycle.
+The testing strategy was intentionally designed to demonstrate:
 
-The strategy extends beyond deployment validation and includes operational readiness, monitoring validation, incident response testing, and disaster recovery verification to better reflect production cloud engineering practices.
+* Automated infrastructure validation
+* Repeatable testing procedures
+* Production-style operational readiness
+* Security verification
+* Infrastructure recovery validation
+* Cloud engineering best practices
+
+---
+
+## Summary
+
+Testing is used to verify that infrastructure, networking, compute, database, security, 
+and operational controls function as expected throughout the platform lifecycle.
+
+The strategy extends beyond deployment validation and includes operational readiness, monitoring validation, 
+incident response testing, and disaster recovery verification to better reflect production cloud engineering practices.
