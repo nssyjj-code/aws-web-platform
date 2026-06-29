@@ -4,17 +4,21 @@
 
 This document describes the disaster recovery (DR) strategy for the AWS Web Platform.
 
-The objective of disaster recovery planning is to restore critical services following infrastructure failures, application outages, configuration errors, or data loss events while minimizing business impact.
+The objective of disaster recovery planning is to restore critical services following infrastructure failures, 
+application outages, configuration errors, or data loss events while minimizing business impact.
 
-The platform leverages AWS managed services, multi-Availability Zone architecture, automated deployments, and infrastructure lifecycle automation to improve resiliency and simplify recovery operations.
+The platform leverages AWS managed services, multi-Availability Zone architecture, 
+automated deployments, and infrastructure lifecycle automation to improve resiliency and simplify recovery operations.
 
 ---
 
-# Disaster Recovery Strategy
+## Disaster Recovery Strategy
 
-This platform most closely aligns with a warm standby disaster recovery strategy. Critical infrastructure is highly available across multiple Availability Zones within a single AWS Region, while recovery from regional failures relies on infrastructure redeployment rather than active multi-region replication.
+This platform most closely aligns with a warm standby disaster recovery strategy. 
+Critical infrastructure is highly available across multiple Availability Zones within a single AWS Region, 
+while recovery from regional failures relies on infrastructure redeployment rather than active multi-region replication.
 
-# Disaster Recovery Objectives
+## Disaster Recovery Objectives
 
 The primary goals of disaster recovery are:
 
@@ -27,13 +31,13 @@ The primary goals of disaster recovery are:
 
 ---
 
-# Recovery Objectives
+## Recovery Objectives
 
 Disaster recovery planning is guided by Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO).
 
 ---
 
-## Recovery Time Objective (RTO)
+### Recovery Time Objective (RTO)
 
 RTO defines the maximum acceptable service downtime.
 
@@ -49,7 +53,7 @@ The platform should be restored to an operational state within one hour of a sig
 
 ---
 
-## Recovery Point Objective (RPO)
+### Recovery Point Objective (RPO)
 
 RPO defines the maximum acceptable data loss.
 
@@ -72,7 +76,7 @@ Actual RPO depends on:
 
 ---
 
-# Disaster Recovery Scope
+## Disaster Recovery Scope
 
 The disaster recovery plan covers:
 
@@ -98,7 +102,7 @@ Excluded scenarios:
 
 ---
 
-# Disaster Recovery Workflow Diagram
+## Disaster Recovery Workflow Diagram
 
 ```text
 CloudWatch Alarm
@@ -119,7 +123,7 @@ Run verify.sh
 Service Restored
 ```
 
-# Disaster Recovery Assumptions
+## Disaster Recovery Assumptions
 
 The recovery strategy assumes:
 
@@ -133,7 +137,7 @@ These assumptions influence achievable recovery timelines.
 
 ---
 
-# Service Recovery Priority
+## Service Recovery Priority
 
 Recovery efforts should prioritize services in the following order.
 
@@ -149,13 +153,13 @@ Application availability depends on successful restoration of database services.
 
 ---
 
-# High Availability Features
+## High Availability Features
 
 The platform includes multiple resiliency mechanisms designed to reduce recovery requirements.
 
 ---
 
-## Multi-Availability Zone Design
+### Multi-Availability Zone Design
 
 Resources are distributed across:
 
@@ -173,7 +177,7 @@ Benefits:
 
 ---
 
-## Application Load Balancer
+### Application Load Balancer
 
 The Application Load Balancer provides:
 
@@ -186,7 +190,7 @@ Unhealthy application instances are automatically removed from service.
 
 ---
 
-## Auto Scaling Group
+### Auto Scaling Group
 
 The Auto Scaling Group provides:
 
@@ -208,7 +212,7 @@ Auto Scaling Replacement
 
 ---
 
-## Aurora MySQL
+### Aurora MySQL
 
 Aurora provides:
 
@@ -221,9 +225,9 @@ These capabilities reduce recovery complexity for database failures.
 
 ---
 
-# Backup Strategy
+## Backup Strategy
 
-## Automated Aurora Backups
+### Automated Aurora Backups
 
 Aurora provides automated backup capabilities.
 
@@ -243,7 +247,7 @@ Depending on business requirements.
 
 ---
 
-## Manual Snapshots
+### Manual Snapshots
 
 Manual snapshots should be created before:
 
@@ -260,7 +264,7 @@ Benefits:
 
 ---
 
-# Recovery Matrix
+## Recovery Matrix
 
 | Failure Type        | Recovery Method                    | Expected Recovery        |
 | ------------------- | ---------------------------------- | ------------------------ |
@@ -273,17 +277,17 @@ Benefits:
 
 ---
 
-# Recovery Scenarios
+## Recovery Scenarios
 
-## Scenario 1 – EC2 Instance Failure
+### Scenario 1 – EC2 Instance Failure
 
-### Symptoms
+#### Symptoms
 
 * Failed status checks
 * Unhealthy targets
 * Reduced application capacity
 
-### Recovery
+#### Recovery
 
 Auto Scaling launches replacement instances automatically.
 
@@ -295,15 +299,15 @@ Expected recovery:
 
 ---
 
-## Scenario 2 – Application Failure
+### Scenario 2 – Application Failure
 
-### Symptoms
+#### Symptoms
 
 * HTTP 5XX responses
 * Failed health checks
 * Application crashes
 
-### Recovery
+#### Recovery
 
 1. Review application logs
 2. Restart services
@@ -318,15 +322,15 @@ Expected recovery:
 
 ---
 
-## Scenario 3 – Aurora Database Failure
+### Scenario 3 – Aurora Database Failure
 
-### Symptoms
+#### Symptoms
 
 * Database connection failures
 * Application database errors
 * Aurora event notifications
 
-### Recovery
+#### Recovery
 
 1. Verify cluster health
 2. Review Aurora events
@@ -341,9 +345,9 @@ Expected recovery:
 
 ---
 
-## Scenario 4 – Accidental Resource Deletion
+### Scenario 4 – Accidental Resource Deletion
 
-### Symptoms
+#### Symptoms
 
 Examples:
 
@@ -352,7 +356,7 @@ Examples:
 * Deleted IAM role
 * Deleted target group
 
-### Recovery
+#### Recovery
 
 Redeploy infrastructure.
 
@@ -366,15 +370,15 @@ Infrastructure automation serves as the primary recovery mechanism.
 
 ---
 
-## Scenario 5 – Availability Zone Failure
+### Scenario 5 – Availability Zone Failure
 
-### Symptoms
+#### Symptoms
 
 * Resource degradation within one AZ
 * Instance loss
 * Reduced capacity
 
-### Recovery
+#### Recovery
 
 1. Verify surviving resources
 2. Review Auto Scaling health
@@ -389,7 +393,7 @@ Automatic or Minimal Intervention
 
 ---
 
-# Infrastructure Recovery Strategy
+## Infrastructure Recovery Strategy
 
 Infrastructure is managed through version-controlled automation scripts, enabling repeatable provisioning, validation, and recovery.
 
@@ -410,7 +414,7 @@ This approach aligns with modern Infrastructure as Code principles.
 
 ---
 
-# Recovery Validation
+## Recovery Validation
 
 Following recovery activities, execute:
 
@@ -430,7 +434,7 @@ Validation should confirm:
 
 ---
 
-# Detection and Monitoring
+## Detection and Monitoring
 
 Disaster recovery relies on rapid detection.
 
@@ -452,7 +456,7 @@ Monitoring should identify:
 
 ---
 
-# Disaster Recovery Testing
+## Disaster Recovery Testing
 
 Recovery procedures should be tested regularly.
 
@@ -469,7 +473,7 @@ Testing validates recovery assumptions and improves operational readiness.
 
 ---
 
-# Future Disaster Recovery Enhancements
+## Future Disaster Recovery Enhancements
 
 Potential future improvements include:
 
@@ -488,7 +492,7 @@ Potential future improvements include:
 
 ---
 
-# Related Documentation
+## Related Documentation
 
 Additional operational references:
 
@@ -508,9 +512,23 @@ docs/architecture/architecture-decisions.md
 
 ---
 
-# Summary
+## Design Goals
 
-The disaster recovery strategy combines AWS managed services, multi-Availability Zone architecture, automated backups, infrastructure automation, and operational procedures to improve resiliency.
+The disaster recovery strategy was intentionally designed to demonstrate:
+
+* Infrastructure resilience
+* Recovery automation
+* High availability
+* Operational readiness
+* Infrastructure lifecycle management
+* Production-style disaster recovery planning
+
+---
+
+## Summary
+
+The disaster recovery strategy combines AWS managed services, multi-Availability Zone architecture, 
+automated backups, infrastructure automation, and operational procedures to improve resiliency.
 
 The platform emphasizes:
 
@@ -520,4 +538,5 @@ The platform emphasizes:
 * Reduced operational complexity
 * Continuous recovery validation
 
-The result is a disaster recovery approach that aligns with modern cloud operations practices while remaining practical for a development and portfolio environment.
+The result is a disaster recovery approach that aligns with modern cloud operations 
+practices while remaining practical for a development and portfolio environment.
