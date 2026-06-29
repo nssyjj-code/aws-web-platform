@@ -2,13 +2,17 @@
 
 ## Overview
 
-This document captures key technical, operational, and architectural lessons learned while designing, deploying, troubleshooting, and refining the AWS Web Platform.
+This document captures key technical, operational, and architectural lessons learned while designing, 
+deploying, troubleshooting, and refining the AWS Web Platform.
 
-The project evolved from a collection of AWS CLI scripts into a dependency-aware deployment framework capable of provisioning and validating a multi-tier AWS environment.
+The project evolved from a collection of AWS CLI scripts into a dependency-aware deployment 
+framework capable of provisioning and validating a multi-tier AWS environment.
 
-Many of the lessons documented here were discovered through troubleshooting real deployment failures, dependency issues, configuration errors, and operational testing.
+Many of the lessons documented here were discovered through troubleshooting real deployment failures, 
+dependency issues, configuration errors, and operational testing.
 
-The goal of this document is to highlight engineering insights gained throughout the project rather than simply documenting successful outcomes.
+The goal of this document is to highlight engineering insights gained throughout 
+the project rather than simply documenting successful outcomes.
 
 ---
 
@@ -16,7 +20,9 @@ The goal of this document is to highlight engineering insights gained throughout
 
 This retrospective captures the technical, architectural, and operational insights gained throughout the development of the AWS Web Platform.
 
-Rather than documenting only successful outcomes, it records the design changes, implementation challenges, and engineering decisions that improved the platform over time. The objective is to preserve institutional knowledge, guide future enhancements, and highlight the evolution of the platform.
+Rather than documenting only successful outcomes, it records the design changes, 
+implementation challenges, and engineering decisions that improved the platform over time. 
+The objective is to preserve institutional knowledge, guide future enhancements, and highlight the evolution of the platform.
 
 ## Engineering Principles Reinforced
 
@@ -30,13 +36,13 @@ Throughout development, several recurring engineering principles emerged:
 - Keep configuration separate from implementation.
 - Document architectural decisions and operational procedures.
 
-# Lesson 1 — Infrastructure Dependencies Matter
+## Lesson 1 — Infrastructure Dependencies Matter
 
-## Initial Assumption
+### Initial Assumption
 
 AWS resources could be created independently as long as the required configuration values were available.
 
-## Reality
+### Reality
 
 Many AWS services depend on other resources already existing before deployment.
 
@@ -68,7 +74,7 @@ Examples included:
 * Missing security groups
 * Missing database subnet groups
 
-## Outcome
+### Outcome
 
 Deployment automation was redesigned around dependency ordering.
 
@@ -80,13 +86,13 @@ This resulted in:
 
 ---
 
-# Lesson 2 — Configuration Centralization Improves Maintainability
+## Lesson 2 — Configuration Centralization Improves Maintainability
 
-## Initial Approach
+### Initial Approach
 
 Resource names, CIDRs, and deployment settings were defined directly inside deployment scripts.
 
-## Problems
+### Problems
 
 Changes required modifications across multiple files.
 
@@ -99,7 +105,7 @@ Examples:
 
 Configuration drift became increasingly difficult to manage.
 
-## Solution
+### Solution
 
 A centralized configuration model was implemented using:
 
@@ -116,9 +122,9 @@ Benefits:
 
 ---
 
-# Lesson 3 — Strict Bash Settings Prevent Hidden Failures
+## Lesson 3 — Strict Bash Settings Prevent Hidden Failures
 
-## Discovery
+### Discovery
 
 Several deployment failures were traced to:
 
@@ -134,7 +140,7 @@ missing configuration values
 failed AWS CLI commands
 ```
 
-## Solution
+### Solution
 
 All scripts adopted:
 
@@ -152,9 +158,9 @@ This became a standard pattern across the entire project.
 
 ---
 
-# Lesson 4 — Resource Discovery Is Better Than Hardcoded IDs
+## Lesson 4 — Resource Discovery Is Better Than Hardcoded IDs
 
-## Initial Approach
+### Initial Approach
 
 Early automation relied on manually retrieving resource identifiers.
 
@@ -166,13 +172,13 @@ Subnet IDs
 Security Group IDs
 ```
 
-## Problems
+### Problems
 
 Resource IDs change between deployments.
 
 Hardcoded values reduce portability and increase maintenance effort.
 
-## Solution
+### Solution
 
 Helper functions were created to dynamically discover resources by name and tags.
 
@@ -192,9 +198,9 @@ Benefits:
 
 ---
 
-# Lesson 5 — Idempotency Is Essential
+## Lesson 5 — Idempotency Is Essential
 
-## Discovery
+### Discovery
 
 Real deployments are rarely executed only once.
 
@@ -211,7 +217,7 @@ Without idempotency, rerunning scripts caused:
 * Deployment failures
 * Operational confusion
 
-## Solution
+### Solution
 
 Every deployment script was redesigned to:
 
@@ -229,9 +235,9 @@ Benefits:
 
 ---
 
-# Lesson 6 — AWS Deletion Dependencies Are Often More Complex Than Creation Dependencies
+## Lesson 6 — AWS Deletion Dependencies Are Often More Complex Than Creation Dependencies
 
-## Discovery
+### Discovery
 
 Destroy automation exposed a class of problems not encountered during deployment.
 
@@ -252,7 +258,7 @@ ResourceInUse:
 Target group is currently in use by a listener or rule
 ```
 
-## Solution
+### Solution
 
 Destroy automation was redesigned using reverse dependency ordering.
 
@@ -270,9 +276,9 @@ This significantly improved cleanup reliability.
 
 ---
 
-# Lesson 7 — Production Networking Is More Complex Than It Appears
+## Lesson 7 — Production Networking Is More Complex Than It Appears
 
-## Discovery
+### Discovery
 
 Networking represented the largest portion of the project.
 
@@ -294,7 +300,7 @@ Missing NAT connectivity
 Subnet discovery issues
 ```
 
-## Outcome
+### Outcome
 
 The final design adopted:
 
@@ -307,13 +313,13 @@ This more closely resembles enterprise AWS networking patterns.
 
 ---
 
-# Lesson 8 — Validation Is Just As Important As Deployment
+## Lesson 8 — Validation Is Just As Important As Deployment
 
-## Initial Assumption
+### Initial Assumption
 
 A successful deployment script implied a successful environment.
 
-## Reality
+### Reality
 
 Resources can exist while still being unusable.
 
@@ -324,7 +330,7 @@ Examples:
 * Incorrect route associations
 * Failed database initialization
 
-## Solution
+### Solution
 
 Dedicated validation automation was implemented.
 
@@ -344,9 +350,9 @@ verify.sh
 
 ---
 
-# Lesson 9 — Launch Templates Require Lifecycle Management
+## Lesson 9 — Launch Templates Require Lifecycle Management
 
-## Discovery
+### Discovery
 
 Updating user-data scripts does not automatically update running instances.
 
@@ -360,7 +366,7 @@ user-data/app-server.sh
 
 does not update existing EC2 instances.
 
-## Solution
+### Solution
 
 Launch Template versioning was introduced.
 
@@ -380,9 +386,9 @@ This mirrors how production Auto Scaling environments are maintained.
 
 ---
 
-# Lesson 10 — Documentation Is Part Of The Platform
+## Lesson 10 — Documentation Is Part Of The Platform
 
-## Discovery
+### Discovery
 
 As infrastructure complexity increased, documentation became increasingly important.
 
@@ -392,7 +398,7 @@ Without documentation:
 * Troubleshooting became slower
 * Operational knowledge remained undocumented
 
-## Outcome
+### Outcome
 
 Documentation evolved into multiple domains:
 
@@ -415,7 +421,7 @@ The platform now includes:
 
 ---
 
-# Lesson 11 — Building Infrastructure Teaches More Than Studying Infrastructure
+## Lesson 11 — Building Infrastructure Teaches More Than Studying Infrastructure
 
 Certifications provide valuable foundational knowledge.
 
@@ -439,7 +445,7 @@ The practical experience gained through implementation was substantially deeper 
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 Areas identified for future enhancement include:
 
@@ -455,7 +461,20 @@ Areas identified for future enhancement include:
 
 ---
 
-# Summary
+## Design Goals
+
+This retrospective was intentionally created to document:
+
+* Engineering lessons learned
+* Architectural evolution
+* Operational improvements
+* Infrastructure design decisions
+* Practical AWS implementation experience
+* Continuous improvement practices
+
+---
+
+## Summary
 
 Building the AWS Web Platform reinforced that successful cloud engineering extends beyond provisioning resources.
 
@@ -469,4 +488,5 @@ Key themes emerged throughout the project:
 * Documentation
 * Recoverability
 
-The final platform reflects not only a deployed AWS environment, but also the engineering practices required to operate and maintain cloud infrastructure in a production-oriented setting.
+The final platform reflects not only a deployed AWS environment, but also the engineering 
+practices required to operate and maintain cloud infrastructure in a production-oriented setting.
