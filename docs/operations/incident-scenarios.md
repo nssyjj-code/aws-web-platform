@@ -4,7 +4,8 @@
 
 This document contains simulated production incidents performed against the AWS Web Platform.
 
-The purpose of these scenarios is to demonstrate operational troubleshooting, incident response, root cause analysis, and recovery procedures.
+The purpose of these scenarios is to demonstrate operational troubleshooting, 
+incident response, root cause analysis, and recovery procedures.
 
 Each incident follows a structured operational workflow:
 
@@ -18,7 +19,7 @@ Each incident follows a structured operational workflow:
 
 ---
 
-# Incident Severity Definitions
+## Incident Severity Definitions
 
 | Severity | Description       | Example Impact                      |
 | -------- | ----------------- | ----------------------------------- |
@@ -29,13 +30,13 @@ Each incident follows a structured operational workflow:
 
 ---
 
-# Incident 001 – Application Load Balancer Returning HTTP 503 Errors
+## Incident 001 – Application Load Balancer Returning HTTP 503 Errors
 
-## Severity
+### Severity
 
 SEV-2
 
-## Detection
+### Detection
 
 Source:
 
@@ -57,7 +58,7 @@ Users unable to access application
 
 ---
 
-## Scenario
+### Scenario
 
 Users report the website is unavailable.
 
@@ -69,7 +70,7 @@ HTTP 503 Service Unavailable
 
 ---
 
-## Incident Timeline
+### Incident Timeline
 
 ```text
 06:00 Alarm Triggered
@@ -83,7 +84,7 @@ HTTP 503 Service Unavailable
 
 ---
 
-## Investigation
+### Investigation
 
 Verify ALB health:
 
@@ -113,7 +114,7 @@ TargetHealth.State = unhealthy
 
 ---
 
-## Root Cause
+### Root Cause
 
 Application instances failed health checks.
 
@@ -126,7 +127,7 @@ Possible causes:
 
 ---
 
-## Resolution
+### Resolution
 
 Replace unhealthy instance:
 
@@ -140,7 +141,7 @@ Auto Scaling launched replacement capacity.
 
 ---
 
-## Recovery Validation
+### Recovery Validation
 
 Validate:
 
@@ -157,7 +158,7 @@ TargetHealth.State = healthy
 
 ---
 
-## Action Items
+### Action Items
 
 * Add synthetic monitoring
 * Create application health dashboard
@@ -165,13 +166,13 @@ TargetHealth.State = healthy
 
 ---
 
-# Incident 002 – Database Connectivity Failure
+## Incident 002 – Database Connectivity Failure
 
-## Severity
+### Severity
 
 SEV-2
 
-## Detection
+### Detection
 
 Source:
 
@@ -187,7 +188,7 @@ Database Connection Failures
 
 ---
 
-## Scenario
+### Scenario
 
 Application instances remain healthy but user requests fail.
 
@@ -199,7 +200,7 @@ Unable to connect to database
 
 ---
 
-## Incident Timeline
+### Incident Timeline
 
 ```text
 11:12 Alert Received
@@ -211,7 +212,7 @@ Unable to connect to database
 
 ---
 
-## Investigation
+### Investigation
 
 Verify Aurora cluster:
 
@@ -240,13 +241,13 @@ TCP 3306
 
 ---
 
-## Root Cause
+### Root Cause
 
 Database security group rule was removed.
 
 ---
 
-## Resolution
+### Resolution
 
 Restore rule:
 
@@ -260,7 +261,7 @@ aws ec2 authorize-security-group-ingress \
 
 ---
 
-## Recovery Validation
+### Recovery Validation
 
 Validate connectivity:
 
@@ -272,7 +273,7 @@ Application errors resolved.
 
 ---
 
-## Action Items
+### Action Items
 
 * Enable AWS Config rule monitoring
 * Implement security group drift detection
@@ -280,13 +281,13 @@ Application errors resolved.
 
 ---
 
-# Incident 003 – Private Instances Cannot Reach the Internet
+## Incident 003 – Private Instances Cannot Reach the Internet
 
-## Severity
+### Severity
 
 SEV-3
 
-## Detection
+### Detection
 
 Source:
 
@@ -302,13 +303,13 @@ Symptoms:
 
 ---
 
-## Scenario
+### Scenario
 
 Private application instances cannot access external services.
 
 ---
 
-## Investigation
+### Investigation
 
 Check NAT Gateway status:
 
@@ -336,13 +337,13 @@ Expected route:
 
 ---
 
-## Root Cause
+### Root Cause
 
 Private application route table missing NAT route.
 
 ---
 
-## Resolution
+### Resolution
 
 Restore route:
 
@@ -355,7 +356,7 @@ aws ec2 create-route \
 
 ---
 
-## Recovery Validation
+### Recovery Validation
 
 Verify outbound connectivity:
 
@@ -371,7 +372,7 @@ HTTP 200
 
 ---
 
-## Action Items
+### Action Items
 
 * Add route validation to verification scripts
 * Add CloudWatch route monitoring
@@ -379,13 +380,13 @@ HTTP 200
 
 ---
 
-# Incident 004 – Auto Scaling Group Not Launching Replacement Capacity
+## Incident 004 – Auto Scaling Group Not Launching Replacement Capacity
 
-## Severity
+### Severity
 
 SEV-2
 
-## Detection
+### Detection
 
 Source:
 
@@ -401,13 +402,13 @@ GroupInServiceInstances < DesiredCapacity
 
 ---
 
-## Scenario
+### Scenario
 
 Failed instances are not replaced automatically.
 
 ---
 
-## Investigation
+### Investigation
 
 Check ASG:
 
@@ -425,7 +426,7 @@ aws autoscaling describe-scaling-activities \
 
 ---
 
-## Possible Root Causes
+### Possible Root Causes
 
 * Invalid launch template
 * Missing IAM permissions
@@ -434,7 +435,7 @@ aws autoscaling describe-scaling-activities \
 
 ---
 
-## Resolution
+### Resolution
 
 Correct dependency issue.
 
@@ -447,7 +448,7 @@ aws autoscaling start-instance-refresh \
 
 ---
 
-## Recovery Validation
+### Recovery Validation
 
 Verify:
 
@@ -457,7 +458,7 @@ Desired Capacity = Running Capacity
 
 ---
 
-## Action Items
+### Action Items
 
 * Add launch template validation
 * Implement deployment testing
@@ -465,13 +466,13 @@ Desired Capacity = Running Capacity
 
 ---
 
-# Incident 005 – Environment Destruction Failure
+## Incident 005 – Environment Destruction Failure
 
-## Severity
+### Severity
 
 SEV-3
 
-## Detection
+### Detection
 
 Source:
 
@@ -487,13 +488,13 @@ ResourceInUse
 
 ---
 
-## Scenario
+### Scenario
 
 Destroy automation fails while removing infrastructure.
 
 ---
 
-## Investigation
+### Investigation
 
 Review ALB dependencies:
 
@@ -510,7 +511,7 @@ Target Group attached to Listener
 
 ---
 
-## Root Cause
+### Root Cause
 
 Dependency ordering issue.
 
@@ -534,7 +535,7 @@ Delete Target Group
 
 ---
 
-## Resolution
+### Resolution
 
 Destroy workflow updated to:
 
@@ -544,13 +545,13 @@ Destroy workflow updated to:
 
 ---
 
-## Recovery Validation
+### Recovery Validation
 
 Destroy process completed successfully.
 
 ---
 
-## Action Items
+### Action Items
 
 * Expand dependency validation
 * Improve destroy script logging
@@ -558,7 +559,7 @@ Destroy process completed successfully.
 
 ---
 
-# Lessons Learned
+## Lessons Learned
 
 Operational excellence requires more than successful deployments.
 
@@ -576,4 +577,34 @@ The objective is not eliminating all failures.
 
 The objective is reducing Mean Time To Detect (MTTD) and Mean Time To Recover (MTTR).
 
-These scenarios demonstrate how production-style incidents can be detected, investigated, resolved, and prevented using AWS operational best practices.
+These scenarios demonstrate how production-style incidents can be detected, 
+investigated, resolved, and prevented using AWS operational best practices.
+
+---
+
+## Key Operational Metrics
+
+Operational effectiveness can be measured using:
+
+* Mean Time to Detect (MTTD)
+* Mean Time to Acknowledge (MTTA)
+* Mean Time to Recover (MTTR)
+* Incident Frequency
+* Change Failure Rate
+
+These metrics help evaluate the effectiveness of monitoring,
+incident response procedures, and operational improvements over
+time.
+
+---
+
+## Design Goals
+
+The incident response playbook was intentionally designed to demonstrate:
+
+* Structured incident response
+* Root cause analysis
+* AWS operational troubleshooting
+* Recovery validation
+* Continuous operational improvement
+* Production-style operational procedures
