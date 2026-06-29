@@ -2,9 +2,11 @@
 
 ## Overview
 
-This document describes the security architecture, controls, and design principles implemented within the AWS Web Platform.
+This document describes the security architecture, controls, 
+and design principles implemented within the AWS Web Platform.
 
-The platform follows a defense-in-depth approach that applies security controls across multiple layers of the environment including:
+The platform follows a defense-in-depth approach that applies 
+security controls across multiple layers of the environment including:
 
 * Network security
 * Identity and access management
@@ -15,11 +17,12 @@ The platform follows a defense-in-depth approach that applies security controls 
 * Encryption
 * Operational governance
 
-Security decisions are based on AWS security best practices, the AWS Shared Responsibility Model, and the principle of least privilege.
+Security decisions are based on AWS security best practices, 
+the AWS Shared Responsibility Model, and the principle of least privilege.
 
 ---
 
-# Security Objectives
+## Security Objectives
 
 The platform was designed to achieve the following security objectives:
 
@@ -33,7 +36,7 @@ The platform was designed to achieve the following security objectives:
 
 ---
 
-# Security Architecture
+## Security Architecture
 
 The environment uses layered security controls.
 
@@ -58,7 +61,7 @@ No component is granted broader access than required.
 
 ---
 
-# Defense-in-Depth Strategy
+## Defense-in-Depth Strategy
 
 Security is implemented at multiple layers.
 
@@ -87,7 +90,7 @@ Multiple overlapping protections reduce overall risk exposure.
 
 ---
 
-# AWS Shared Responsibility Model
+## AWS Shared Responsibility Model
 
 The platform follows the AWS Shared Responsibility Model.
 
@@ -115,9 +118,9 @@ This project secures:
 
 ---
 
-# Network Security Design
+## Network Security Design
 
-## Public Tier
+### Public Tier
 
 Public resources include:
 
@@ -142,7 +145,7 @@ No EC2 instances are directly reachable from the internet.
 
 ---
 
-## Application Tier Security
+### Application Tier Security
 
 Application instances are deployed within private application subnets.
 
@@ -172,7 +175,7 @@ Benefits:
 
 ---
 
-## Database Tier Security
+### Database Tier Security
 
 Aurora MySQL is deployed within dedicated private database subnets.
 
@@ -202,22 +205,22 @@ Blocked communication:
 
 ---
 
-# Security Group Strategy
+## Security Group Strategy
 
 Security groups implement least-privilege network access.
 
 ---
 
-## Load Balancer Security Group
+### Load Balancer Security Group
 
-### Inbound
+#### Inbound
 
 | Source   | Protocol | Port         |
 | -------- | -------- | ------------ |
 | Internet | TCP      | 80           |
 | Internet | TCP      | 443 (future) |
 
-### Outbound
+#### Outbound
 
 | Destination      | Purpose         |
 | ---------------- | --------------- |
@@ -225,15 +228,15 @@ Security groups implement least-privilege network access.
 
 ---
 
-## Application Security Group
+### Application Security Group
 
-### Inbound
+#### Inbound
 
 | Source             | Protocol | Port |
 | ------------------ | -------- | ---- |
 | ALB Security Group | TCP      | 80   |
 
-### Outbound
+#### Outbound
 
 | Destination     | Purpose            |
 | --------------- | ------------------ |
@@ -243,9 +246,9 @@ Security groups implement least-privilege network access.
 
 ---
 
-## Database Security Group
+### Database Security Group
 
-### Inbound
+#### Inbound
 
 | Source                     | Protocol | Port |
 | -------------------------- | -------- | ---- |
@@ -255,9 +258,9 @@ Security group references are used instead of broad CIDR ranges wherever possibl
 
 ---
 
-# Identity and Access Management
+## Identity and Access Management
 
-## EC2 IAM Role Design
+### EC2 IAM Role Design
 
 Application instances receive AWS permissions through IAM roles.
 
@@ -285,7 +288,7 @@ Benefits:
 
 ---
 
-## Least Privilege Philosophy
+### Least Privilege Philosophy
 
 Permissions should only grant access required to perform assigned responsibilities.
 
@@ -297,7 +300,7 @@ Benefits:
 
 ---
 
-# Administrative Access
+## Administrative Access
 
 Traditional SSH administration is intentionally avoided.
 
@@ -315,7 +318,7 @@ EC2 Instance
 
 ---
 
-## Systems Manager Access Model
+### Systems Manager Access Model
 
 Preferred administrative path:
 
@@ -342,7 +345,7 @@ Benefits:
 
 ---
 
-# Credential Management
+## Credential Management
 
 The repository intentionally excludes all secrets.
 
@@ -358,7 +361,7 @@ Application Secrets
 
 ---
 
-## Database Credentials
+### Database Credentials
 
 Development deployments use environment variables.
 
@@ -373,7 +376,7 @@ These values are never committed to source control.
 
 ---
 
-## Production Recommendation
+### Production Recommendation
 
 Production environments should use:
 
@@ -390,9 +393,9 @@ Benefits:
 
 ---
 
-# Encryption Strategy
+## Encryption Strategy
 
-## Data in Transit
+### Data in Transit
 
 Current implementation:
 
@@ -422,7 +425,7 @@ Recommended implementation:
 
 ---
 
-## Data at Rest
+### Data at Rest
 
 Recommended encryption targets:
 
@@ -446,13 +449,13 @@ Benefits:
 
 ---
 
-# Security Monitoring
+## Security Monitoring
 
 Security monitoring should provide visibility into infrastructure activity and configuration changes.
 
 ---
 
-## AWS CloudTrail
+### AWS CloudTrail
 
 Purpose:
 
@@ -462,7 +465,7 @@ Purpose:
 
 ---
 
-## Amazon CloudWatch
+### Amazon CloudWatch
 
 Purpose:
 
@@ -472,7 +475,7 @@ Purpose:
 
 ---
 
-## AWS Config
+### AWS Config
 
 Purpose:
 
@@ -482,7 +485,7 @@ Purpose:
 
 ---
 
-## VPC Flow Logs
+### VPC Flow Logs
 
 Future implementation:
 
@@ -494,7 +497,7 @@ Purpose:
 
 ---
 
-# Security Control Matrix
+## Security Control Matrix
 
 | Security Domain       | Control                                        |
 | --------------------- | ---------------------------------------------- |
@@ -509,7 +512,7 @@ Purpose:
 
 ---
 
-# Incident Response Considerations
+## Incident Response Considerations
 
 Security monitoring should support:
 
@@ -528,7 +531,7 @@ docs/operations/operational-runbook.md
 
 ---
 
-# Security Roadmap
+## Security Roadmap
 
 Planned future enhancements:
 
@@ -546,7 +549,7 @@ Planned future enhancements:
 
 ---
 
-# Related Architecture Decisions
+## Related Architecture Decisions
 
 Relevant ADRs include:
 
@@ -565,9 +568,23 @@ docs/architecture/architecture-decisions.md
 
 ---
 
-# Summary
+## Design Goals
 
-The AWS Web Platform implements layered security controls across networking, identity, administration, database protection, and operational monitoring.
+The security architecture was intentionally designed to demonstrate:
+
+* Defense in depth
+* Least-privilege access
+* Secure network segmentation
+* IAM role-based authentication
+* AWS-native security services
+* Production-style AWS security patterns
+
+---
+
+## Summary
+
+The AWS Web Platform implements layered security controls across networking, 
+identity, administration, database protection, and operational monitoring.
 
 The design emphasizes:
 
@@ -577,4 +594,5 @@ The design emphasizes:
 * Secure administration
 * Future security extensibility
 
-The resulting architecture closely aligns with common security patterns used in modern AWS production environments while remaining practical for development and portfolio use.
+The resulting architecture closely aligns with common security patterns used in modern 
+AWS production environments while remaining practical for development and portfolio use.
