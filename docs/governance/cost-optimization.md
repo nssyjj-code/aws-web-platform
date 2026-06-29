@@ -2,9 +2,11 @@
 
 ## Overview
 
-This document describes the cost considerations, optimization strategies, and architectural tradeoffs associated with the AWS Web Platform.
+This document describes the cost considerations, optimization strategies, 
+and architectural tradeoffs associated with the AWS Web Platform.
 
-The platform was intentionally designed to demonstrate production-style AWS architecture patterns while maintaining awareness of infrastructure cost management.
+The platform was intentionally designed to demonstrate production-style AWS architecture 
+patterns while maintaining awareness of infrastructure cost management.
 
 The goal is not simply to minimize spending, but to understand the engineering tradeoffs between:
 
@@ -18,7 +20,7 @@ This project aligns with concepts from the AWS Well-Architected Framework Cost O
 
 ---
 
-# Cost Optimization Objectives
+## Cost Optimization Objectives
 
 The platform was designed with the following cost optimization objectives:
 
@@ -32,7 +34,7 @@ The platform was designed with the following cost optimization objectives:
 
 ---
 
-# AWS Well-Architected Alignment
+## AWS Well-Architected Alignment
 
 This project incorporates several principles from the AWS Well-Architected Framework Cost Optimization Pillar.
 
@@ -50,7 +52,7 @@ Cost optimization is treated as a continuous operational responsibility rather t
 
 ---
 
-# Cost Awareness
+## Cost Awareness
 
 This platform provisions multiple managed AWS services.
 
@@ -75,7 +77,7 @@ The largest cost contributors are typically:
 
 ---
 
-# Cost Management Recommendation
+## Cost Management Recommendation
 
 This environment is intended primarily for:
 
@@ -96,9 +98,10 @@ Automated teardown helps reduce unnecessary AWS charges and encourages responsib
 
 ---
 
-# Cost Design Philosophy
+## Cost Design Philosophy
 
-This project intentionally prioritizes learning production architecture patterns over building the lowest-cost AWS environment.
+This project intentionally prioritizes learning production architecture 
+patterns over building the lowest-cost AWS environment.
 
 Several architectural decisions increase cost but more accurately reflect real-world enterprise deployments.
 
@@ -115,7 +118,7 @@ The objective is to demonstrate production design principles rather than optimiz
 
 ---
 
-# Portfolio Design vs Cost Optimization
+## Portfolio Design vs Cost Optimization
 
 This project intentionally does not represent the least expensive AWS implementation.
 
@@ -140,7 +143,7 @@ The selected architecture increases cost while improving:
 
 ---
 
-# Primary Cost Drivers
+## Primary Cost Drivers
 
 | AWS Service               | Purpose                        | Cost Consideration                            |
 | ------------------------- | ------------------------------ | --------------------------------------------- |
@@ -154,9 +157,9 @@ The selected architecture increases cost while improving:
 
 ---
 
-# Compute Cost Optimization
+## Compute Cost Optimization
 
-## Auto Scaling Design
+### Auto Scaling Design
 
 The application tier uses EC2 instances managed through an Auto Scaling Group.
 
@@ -177,7 +180,7 @@ Benefits:
 
 ---
 
-## Optimization Opportunities
+### Optimization Opportunities
 
 Future improvements may include:
 
@@ -191,9 +194,9 @@ Monitoring utilization metrics should always precede infrastructure resizing dec
 
 ---
 
-# Networking Cost Optimization
+## Networking Cost Optimization
 
-## NAT Gateway Architecture
+### NAT Gateway Architecture
 
 The environment deploys one NAT Gateway per Availability Zone.
 
@@ -213,7 +216,7 @@ Private App Subnet AZ2
 
 ---
 
-## Design Rationale
+### Design Rationale
 
 The design improves availability by preventing a single Availability Zone dependency.
 
@@ -225,7 +228,7 @@ Benefits:
 
 ---
 
-## Cost Tradeoff
+### Cost Tradeoff
 
 A lower-cost alternative would use a single NAT Gateway.
 
@@ -260,9 +263,9 @@ Availability was prioritized over minimum cost.
 
 ---
 
-# Database Cost Optimization
+## Database Cost Optimization
 
-## Aurora MySQL
+### Aurora MySQL
 
 Aurora was selected to demonstrate managed database architecture.
 
@@ -276,7 +279,7 @@ Benefits:
 
 ---
 
-## Cost Considerations
+### Cost Considerations
 
 Aurora costs are primarily influenced by:
 
@@ -287,7 +290,7 @@ Aurora costs are primarily influenced by:
 
 ---
 
-## Development Recommendations
+### Development Recommendations
 
 Development environments can reduce costs by:
 
@@ -298,7 +301,7 @@ Development environments can reduce costs by:
 
 ---
 
-## Production Recommendations
+### Production Recommendations
 
 Production workloads should:
 
@@ -310,9 +313,9 @@ Production workloads should:
 
 ---
 
-# Storage Optimization
+## Storage Optimization
 
-## Amazon EBS
+### Amazon EBS
 
 Application instances use EBS-backed storage.
 
@@ -331,7 +334,7 @@ Benefits:
 
 ---
 
-# Resource Lifecycle Management
+## Resource Lifecycle Management
 
 Unused cloud resources create unnecessary costs.
 
@@ -362,7 +365,7 @@ This prevents development environments from generating ongoing charges.
 
 ---
 
-# Resource Tagging Strategy
+## Resource Tagging Strategy
 
 The platform uses resource tagging to improve governance and cost visibility.
 
@@ -383,13 +386,13 @@ Benefits:
 
 ---
 
-# Cost Monitoring Strategy
+## Cost Monitoring Strategy
 
 Production environments should implement continuous cost monitoring.
 
 ---
 
-## AWS Budgets
+### AWS Budgets
 
 Used for:
 
@@ -399,7 +402,7 @@ Used for:
 
 ---
 
-## AWS Cost Explorer
+### AWS Cost Explorer
 
 Used for:
 
@@ -409,7 +412,7 @@ Used for:
 
 ---
 
-## AWS Cost Anomaly Detection
+### AWS Cost Anomaly Detection
 
 Used for:
 
@@ -419,7 +422,7 @@ Used for:
 
 ---
 
-# Cost Controls Implemented
+## Cost Controls Implemented
 
 Current controls include:
 
@@ -432,7 +435,7 @@ Current controls include:
 
 ---
 
-# Future Cost Improvements
+## Future Cost Improvements
 
 Potential enhancements include:
 
@@ -448,9 +451,9 @@ Potential enhancements include:
 
 ---
 
-# Architecture Cost Tradeoffs
+## Architecture Cost Tradeoffs
 
-## Availability vs Cost
+### Availability vs Cost
 
 Decision:
 
@@ -466,7 +469,7 @@ Additional infrastructure costs.
 
 ---
 
-## Managed Services vs Self-Managed Services
+### Managed Services vs Self-Managed Services
 
 Decision:
 
@@ -482,7 +485,7 @@ Higher service cost compared to self-managed databases.
 
 ---
 
-## Security vs Cost
+### Security vs Cost
 
 Decision:
 
@@ -498,7 +501,7 @@ Additional networking costs.
 
 ---
 
-# Related Documentation
+## Related Documentation
 
 Additional architecture and governance references:
 
@@ -519,7 +522,20 @@ ADR-012 Systems Manager Instead of SSH
 
 ---
 
-# Summary
+## Design Goals
+
+The cost optimization strategy was intentionally designed to demonstrate:
+
+* Cost-aware AWS architecture
+* Resource lifecycle management
+* Operational governance
+* Production-style tradeoff analysis
+* AWS Well-Architected Framework principles
+* Responsible cloud resource management
+
+---
+
+## Summary
 
 The AWS Web Platform intentionally balances production-style architecture with cost awareness.
 
